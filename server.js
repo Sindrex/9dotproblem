@@ -36,7 +36,7 @@ app.post("/api/9dotproblem", (req, res) => {
   });
 });
 
-//get URL
+//get config
 app.get("/game/StreamingAssets", (req, res) => {
   console.log("/game/StreamingAssets got GET request from client");
   res.status(200);
@@ -48,26 +48,6 @@ app.get("/game/StreamingAssets", (req, res) => {
       "HELP_TEXT":config.HELP_TEXT
   });
   console.log("Sent URL: " + config.URL + "/api/9dotproblem");
-});
-
-//get max seconds
-app.get("/api/maxsec", (req, res) => {
-  console.log("/api/maxsec got GET request from client");
-  res.status(200);
-  res.json(config.MAX_SEC);
-  console.log("Sent max sec: " + config.MAX_SEC);
-});
-
-//get config options
-app.get("/api/config", (req, res) => {
-  console.log("/api/config got GET request from client");
-  res.status(200);
-  res.json({
-    "MAX_SEC":config.MAX_SEC,
-    "SHOW_TIMER":config.SHOW_TIMER,
-    "HELP_TEXT":config.HELP_TEXT
-  });
-  console.log("Sent max sec: " + config.MAX_SEC);
 });
 
 //TESTING--------------------------

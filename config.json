@@ -5,6 +5,6 @@
   "DATABASE_DB":"sindrhpa",
   "URL":"https://ninedotproblem.herokuapp.com",
   "MAX_SEC":60,
-  "SHOW_TIMER":false,
+  "SHOW_TIMER":true,
   "HELP_TEXT":"Draw four consecutive lines through all nine circles. Test!"
 }
