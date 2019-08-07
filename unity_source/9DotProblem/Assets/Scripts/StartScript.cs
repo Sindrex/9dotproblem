@@ -36,7 +36,7 @@ public class StartScript : MonoBehaviour {
         playButton.interactable = data.urlOK;
 
         //testing
-        //if (Input.GetKeyDown(KeyCode.E)) play();
+        if (Input.GetKeyDown(KeyCode.E)) play();
     }
 
     public void play()

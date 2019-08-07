@@ -4873,8 +4873,10 @@ MonoBehaviour:
   quitText: {fileID: 1403341960}
   quitButton: {fileID: 1477376566}
   tryAgainButton: {fileID: 464297229}
-  helpText: {fileID: 0}
+  helpText: {fileID: 952249005}
+  maxsec: 0
   timer: {fileID: 0}
+  timerWrapper: {fileID: 2106764743}
   timerFull: {fileID: 503177825}
   timerCurrent: {fileID: 575439322}
   timeUpText: {fileID: 81709416}
