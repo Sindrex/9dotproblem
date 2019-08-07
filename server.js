@@ -58,9 +58,9 @@ app.get("/api/config", (req, res) => {
   console.log("/api/config got GET request from client");
   res.status(200);
   res.json({
-    config.MAX_SEC,
-    config.SHOW_TIMER,
-    config.HELP_TEXT
+    "MAX_SEC":config.MAX_SEC,
+    "SHOW_TIMER":config.SHOW_TIMER,
+    "HELP_TEXT":config.HELP_TEXT
   });
   console.log("Sent max sec: " + config.MAX_SEC);
 });
