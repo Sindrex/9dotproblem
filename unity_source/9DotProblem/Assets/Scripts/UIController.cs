@@ -50,7 +50,7 @@ public class UIController : MonoBehaviour {
 
         timerFull.text = "" + FormatTime(timer.fullTimer);
         timerCurrent.text = "" + FormatTime(timer.curTimer);
-        if(timer.fullTimer >= GC.http.maxsec && GC.http.maxsec > 0 && timer.takeTime) //check if maxtime is surpassed and maxtime is gotten (not 0).
+        if(timer.fullTimer >= GC.http.config.MAX_SEC && GC.http.config.MAX_SEC > 0 && timer.takeTime) //check if maxtime is surpassed and maxtime is gotten (not 0).
         {
             Debug.Log("Time's up Sunny!");
             setNonInteractableButtons();

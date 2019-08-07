@@ -41,8 +41,13 @@ app.get("/game/StreamingAssets", (req, res) => {
   console.log("/game/StreamingAssets got GET request from client");
   res.status(200);
   //res.json(config.URL + ":" + (process.env.PORT || 3000) + "/api/9dotproblem");
-  res.json(config.URL + "/api/9dotproblem");
-  console.log("Sent URL: " + config.URL);
+  res.json({
+      "URL":config.URL + "/api/9dotproblem",
+      "MAX_SEC":config.MAX_SEC,
+      "SHOW_TIMER":config.SHOW_TIMER,
+      "HELP_TEXT":config.HELP_TEXT
+  });
+  console.log("Sent URL: " + config.URL + "/api/9dotproblem");
 });
 
 //get max seconds

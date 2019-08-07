@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class HTTPController : MonoBehaviour {
 
-    public string url = "temp";
-    public int maxsec = 0;
+    //public int maxsec = 0;
+
+    public ConfigWrapper config;
 
     //current format: id (varchar), try_nr (int), point1, point2, ... point8 (varchar)
 
@@ -24,21 +25,22 @@ public class HTTPController : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
 
         //get URL once
-        StartCoroutine(startUp());
+        StartCoroutine(getConfig());
     }
 
+    /*
     IEnumerator startUp()
     {
-        yield return getURL();
+        //yield return getURL();
         Debug.Log("Fetched URL");
-        yield return getMaxSec();
+        //yield return getMaxSec();
         Debug.Log("Fetched MaxSec");
         //yield return getShowTimer();
         Debug.Log("Fetched MaxSec");
         //yield return getHelpText();
-    }
+    }*/
 
-    IEnumerator getURL() //string id, List<ProblemTry> tries
+    IEnumerator getConfig() //string id, List<ProblemTry> tries
     {
         string myURL = Application.streamingAssetsPath;
 
@@ -55,17 +57,20 @@ public class HTTPController : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Received: " + uwr.downloadHandler.text);
+            Debug.Log("Received: \n" + uwr.downloadHandler.text);
 
             //string response = System.Text.Encoding.UTF8.GetString(uwr.downloadHandler.data);
             //URLWrapper newURL = JsonUtility.FromJson<URLWrapper>(response);
             //Debug.Log("Got URL response: " + response);
-            url = uwr.downloadHandler.text;
-            url = url.Replace("\"", "");
-            Debug.Log("URL set to: " + url);
+            config = ConfigWrapper.CreateFromJSON(uwr.downloadHandler.text);
+            //url = url.Replace("\"", "");
+            Debug.Log("URL: " + config.URL);
+            Debug.Log("MAXSEC: " + config.URL);
+            Debug.Log("SHOWTIMER: " + config.URL);
+            Debug.Log("HELPTEXT: " + config.URL);
         }
     }
-
+    /*
     IEnumerator getMaxSec()
     {
         string myURL = url.Substring(0, url.Length - 11) + "maxsec";
@@ -91,13 +96,15 @@ public class HTTPController : MonoBehaviour {
 
             maxsec = int.Parse(uwr.downloadHandler.text);
         }
-    }
+    }*/
 
+    //unused
     public void send(string id, List<ProblemTry> tries)
     {
         beforeSend(id, tries);
     }
 
+    //unused
     private void beforeSend(string id, List<ProblemTry> tries)
     {
         int trynr = 1;
@@ -114,7 +121,7 @@ public class HTTPController : MonoBehaviour {
             print("json: " + json);
             trynr++;
 
-            StartCoroutine(sendPOST(json, url));
+            StartCoroutine(sendPOST(json));
         }
     }
 
@@ -130,15 +137,14 @@ public class HTTPController : MonoBehaviour {
         json += "}";
         print("json: " + json);
 
-        StartCoroutine(sendPOST(json, url));
+        StartCoroutine(sendPOST(json));
     }
 
-    IEnumerator sendPOST(string json, string url)
+    IEnumerator sendPOST(string json)
     {
-        //string url = ResourceLoader.loadJson<URLWrapper>("/config.json").url; //streamingassets, did not work with webGL
-        
-        print("Sending post req to: " + url + "\nSending: " + json);
-        var uwr = new UnityWebRequest(url, "POST");
+        print("Sending post req to: " + config.URL + "\nSending: " + json);
+
+        var uwr = new UnityWebRequest(config.URL, "POST");
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
         uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
         uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -155,5 +161,19 @@ public class HTTPController : MonoBehaviour {
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
         }
+    }
+}
+
+[System.Serializable]
+public class ConfigWrapper
+{
+    public string URL;
+    public int MAX_SEC;
+    public bool SHOW_TIMER;
+    public string HELP_TEXT;
+
+    public static ConfigWrapper CreateFromJSON(string jsonString)
+    {
+        return JsonUtility.FromJson<ConfigWrapper>(jsonString);
     }
 }
