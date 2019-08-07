@@ -227,8 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd72af17489b9f4a9498faede8a45e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: temp
-  maxsec: 0
+  config:
+    URL: 
+    MAX_SEC: 0
+    SHOW_TIMER: 0
+    HELP_TEXT: 
 --- !u!1 &44390372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,7 +2264,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Draw four consecutive lines through all nine circles. '
+  m_Text: Template
 --- !u!222 &952249006
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4870,6 +4873,7 @@ MonoBehaviour:
   quitText: {fileID: 1403341960}
   quitButton: {fileID: 1477376566}
   tryAgainButton: {fileID: 464297229}
+  helpText: {fileID: 0}
   timer: {fileID: 0}
   timerFull: {fileID: 503177825}
   timerCurrent: {fileID: 575439322}

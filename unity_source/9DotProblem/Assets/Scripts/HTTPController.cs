@@ -65,9 +65,9 @@ public class HTTPController : MonoBehaviour {
             config = ConfigWrapper.CreateFromJSON(uwr.downloadHandler.text);
             //url = url.Replace("\"", "");
             Debug.Log("URL: " + config.URL);
-            Debug.Log("MAXSEC: " + config.URL);
-            Debug.Log("SHOWTIMER: " + config.URL);
-            Debug.Log("HELPTEXT: " + config.URL);
+            Debug.Log("MAX_SEC: " + config.MAX_SEC);
+            Debug.Log("SHOW_TIMER: " + config.SHOW_TIMER);
+            Debug.Log("HELP_TEXT: " + config.HELP_TEXT);
         }
     }
     /*

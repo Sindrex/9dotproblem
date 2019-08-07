@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HelpButton : MonoBehaviour {
 
@@ -9,7 +10,6 @@ public class HelpButton : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         wrapper.SetActive(false);
-
     }
 
     private void OnMouseOver()

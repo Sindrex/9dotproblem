@@ -17,7 +17,12 @@ public class UIController : MonoBehaviour {
     public Button quitButton;
     public Button tryAgainButton;
 
+    //set by config
+    public Text helpText;
+    public int maxsec;
+
     public TimerScript timer;
+    public GameObject timerWrapper;
     public Text timerFull;
     public Text timerCurrent;
     public GameObject timeUpText;
@@ -31,7 +36,15 @@ public class UIController : MonoBehaviour {
         tryCount.text = "" + GC.data.tries.Count;
         timer = GC.timer;
 
-        if(GC.data.tries.Count <= 0)
+        //config
+        helpText.text = GC.http.config.HELP_TEXT;
+        maxsec = GC.http.config.MAX_SEC;
+        if (!GC.http.config.SHOW_TIMER)
+        {
+            timerWrapper.SetActive(false);
+        }
+
+        if (GC.data.tries.Count <= 0)
         {
             lerper.lerpIntro(finishedLerp);
             //lineMaker.done = true;
@@ -50,7 +63,7 @@ public class UIController : MonoBehaviour {
 
         timerFull.text = "" + FormatTime(timer.fullTimer);
         timerCurrent.text = "" + FormatTime(timer.curTimer);
-        if(timer.fullTimer >= GC.http.config.MAX_SEC && GC.http.config.MAX_SEC > 0 && timer.takeTime) //check if maxtime is surpassed and maxtime is gotten (not 0).
+        if(timer.fullTimer >= maxsec && maxsec > 0 && timer.takeTime) //check if maxtime is surpassed and maxtime is gotten (not 0).
         {
             Debug.Log("Time's up Sunny!");
             setNonInteractableButtons();
