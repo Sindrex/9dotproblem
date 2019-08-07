@@ -87,18 +87,6 @@ public class UIController : MonoBehaviour {
         SceneManager.LoadScene("Main");
     }
 
-    //@Deprecated
-    public void quitSend()
-    {
-        print("Quitting...");
-        DataCollector data = GameObject.Find("DataCollector").GetComponent<DataCollector>();
-        data.add(lineMaker.myLines, GC.http);
-        data.send(GC.http);
-        quitText.SetActive(true);
-        setNonInteractableButtons();
-        lineMaker.done = true;
-    }
-
     public void setNonInteractableButtons()
     {
         quitButton.interactable = false;

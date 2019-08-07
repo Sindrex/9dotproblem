@@ -31,8 +31,10 @@ There is a single JSON formatted file called "config.json". It has the following
  * **DATABASE_PASS:** The password for the user.
  * **DATABASE_DB:** Which database to use within this user and host.
  * **URL:** The URL which the server is hosted on. Domain name or IP address. E.g. "https://ninedotproblem.herokuapp.com".
-   Note that you might need ":PORT" added to the end of the URL, where PORT is the port the server is listening on. This is not always the case, so you will have to test it out for yourself.
+   Note that you might need ":PORT" added to the end of the URL, where PORT is the port the server is listening on. This is not always the case, so you will have to test it out for yourself. For example "http://localhost:3000".
  * **MAX_SEC:** The number of *seconds* a user has to do the test. Must be an integer larger than 0.
+ * **SHOW_TIMER:** Whether or not the timer should be shown. Set with either *"true"* or *"false"*.
+ * **HELP_TEXT:** What text the help button should show. A text string of maximum 450 characters including spaces.
 
  *Note: the database needs to be an SQL database, preferrably using Mysql.*
 

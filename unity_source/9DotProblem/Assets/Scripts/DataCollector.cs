@@ -71,9 +71,4 @@ public class DataCollector : MonoBehaviour {
         //send right away
         http.sendOne(playerID, (tries.IndexOf(newTry) + 1), newTry);
     }
-
-    public void send(HTTPController http)
-    {
-        http.send(playerID, tries);
-    }
 }
