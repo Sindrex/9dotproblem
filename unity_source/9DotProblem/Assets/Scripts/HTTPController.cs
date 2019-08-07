@@ -33,6 +33,9 @@ public class HTTPController : MonoBehaviour {
         Debug.Log("Fetched URL");
         yield return getMaxSec();
         Debug.Log("Fetched MaxSec");
+        //yield return getShowTimer();
+        Debug.Log("Fetched MaxSec");
+        //yield return getHelpText();
     }
 
     IEnumerator getURL() //string id, List<ProblemTry> tries

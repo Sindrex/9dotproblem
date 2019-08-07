@@ -53,7 +53,19 @@ app.get("/api/maxsec", (req, res) => {
   console.log("Sent max sec: " + config.MAX_SEC);
 });
 
-//TESTING
+//get config options
+app.get("/api/config", (req, res) => {
+  console.log("/api/config got GET request from client");
+  res.status(200);
+  res.json({
+    config.MAX_SEC,
+    config.SHOW_TIMER,
+    config.HELP_TEXT
+  });
+  console.log("Sent max sec: " + config.MAX_SEC);
+});
+
+//TESTING--------------------------
 app.post("/9dotproblem", (req, res) => {
   console.log("/9dotproblem got POST request from client");
   new DaoWrapper(pool).createOne(req.body, (status, data) => {
