@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 
 public class DataCollector : MonoBehaviour {
 
+    public static readonly int MAX_POINTS = 5;
+
     public string playerID = "temp";
     public bool urlOK = false;
 
@@ -29,9 +31,10 @@ public class DataCollector : MonoBehaviour {
 
         tries = new List<ProblemTry>();
 
+        //URL stuff
         string url = GetURL();
         Debug.Log("URL gotten: " + url);
-        if (url.Contains("id="))
+        if (url.Contains("id=")) //might be changed to "?id="
         {
             urlOK = true;
             playerID = url.Split('=')[1];
@@ -44,31 +47,37 @@ public class DataCollector : MonoBehaviour {
         }
     }
 
-    public void add(List<GameObject> lines, HTTPController http)
+    public void add(List<LineDataPointController> points, bool accepted, HTTPController http)
     {
         if (trySent)
         {
             Debug.Log("Try already sent! Not sending again");
             return;
         }
-
-        foreach (GameObject go in lines)
+        else if (points.Count > MAX_POINTS)
         {
-            LineRenderer lr = go.GetComponent<LineRenderer>();
-            print("Collecting: " + lr.GetPosition(0) + "/" + lr.GetPosition(1));
+            throw new System.Exception("Too many points! Should be max " + MAX_POINTS);
         }
 
-        List<Vector2> points = new List<Vector2>();
-        foreach(GameObject go in lines)
+        trySent = true;
+
+        List<Vector2> positions = new List<Vector2>();
+        List<string> nodes = new List<string>();
+        foreach (LineDataPointController point in points)
         {
-            LineRenderer lr = go.GetComponent<LineRenderer>();
-            points.Add(lr.GetPosition(0));
-            points.Add(lr.GetPosition(1));
+            //print("Collecting: " + point.transform.position);
+            positions.Add(point.transform.position);
+            nodes.Add(point.nodeName);
         }
-        ProblemTry newTry = new ProblemTry(points);
+
+        ProblemTry newTry = new ProblemTry();
         tries.Add(newTry);
+        newTry.positions = positions;
+        newTry.nodes = nodes;
+        newTry.accepted = accepted;
 
         //send right away
-        http.sendOne(playerID, (tries.IndexOf(newTry) + 1), newTry);
+        int tryNr = (tries.IndexOf(newTry) + 1);
+        http.sendOne(playerID, tryNr, newTry);
     }
 }

@@ -70,15 +70,15 @@ public class UIController : MonoBehaviour {
             lineMaker.done = true;
             timer.takeTime = false;
             timeUpText.SetActive(true);
-            GC.data.add(lineMaker.myLines, GC.http); //send the remaining
+            GC.addPoints();
         }
 	}
 
     public void tryAgain()
     {
-        GC.data.add(lineMaker.myLines, GC.http);
+        //GC.data.add(lineMaker.myLines, GC.http);
+        GC.addPoints(); //add data and send it!
         timer.curTimer = 0;
-        GC.data.trySent = true; //kinda redundant as we're reloading scene
         reloadScene();
     }
 

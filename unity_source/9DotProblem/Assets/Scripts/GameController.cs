@@ -8,7 +8,9 @@ public class GameController : MonoBehaviour {
     public LineMakerScript lineMaker;
     public DotController[] dots;
 
+    public float waitWhenCheckDone = 0.5f;
     public GameObject winText;
+    public bool accepted;
 
     public HTTPController http;
     public DataCollector data;
@@ -29,6 +31,13 @@ public class GameController : MonoBehaviour {
 
     public void checkDone()
     {
+        StartCoroutine(checkDoneIEnum());
+    }
+
+    private IEnumerator checkDoneIEnum()
+    {
+        yield return new WaitForSeconds(waitWhenCheckDone);
+
         int accepted = 0;
         foreach (DotController dot in dots)
         {
@@ -44,14 +53,18 @@ public class GameController : MonoBehaviour {
             winText.SetActive(true);
             ui.setNonInteractableButtons();
             timer.takeTime = false;
+            this.accepted = true;
         }
         else
         {
-            Debug.Log("no win :c");
             //4 lines but no win
+            Debug.Log("no win :c");
         }
-        data.add(lineMaker.myLines, http);
-        data.trySent = true;
+        addPoints();
     }
 
+    public void addPoints()
+    {
+        data.add(lineMaker.points, accepted, http);
+    }
 }

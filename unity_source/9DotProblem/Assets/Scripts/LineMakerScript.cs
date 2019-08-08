@@ -16,9 +16,13 @@ public class LineMakerScript : MonoBehaviour {
 
     public string buttonTag;
 
+    public GameObject pointPrefab;
+    public List<LineDataPointController> points;
+
     // Use this for initialization
     void Start () {
         myLines = new List<GameObject>();
+        points = new List<LineDataPointController>();
     }
 	
 	// Update is called once per frame
@@ -38,6 +42,7 @@ public class LineMakerScript : MonoBehaviour {
                 }
             }
 
+            Vector3 currentPos = new Vector3(mousePos.x, mousePos.y, 0);
             if (Input.GetMouseButtonDown(0)) //make line!
             {
                 Debug.Log("Making line!");
@@ -56,12 +61,16 @@ public class LineMakerScript : MonoBehaviour {
 
                 if (myLines.Count <= 0) //first line
                 {
-                    Vector3 startPos = new Vector3(mousePos.x, mousePos.y, 0);
+                    Vector3 startPos = currentPos;
 
                     myLine.transform.position = startPos;
 
                     lr.SetPosition(0, startPos);
                     lr.SetPosition(1, startPos);
+
+                    GameObject prefab = Instantiate(pointPrefab);
+                    prefab.transform.position = startPos;
+                    points.Add(prefab.GetComponent<LineDataPointController>());
                 }
                 else if(myLines.Count < maxLines) //not first line
                 {
@@ -82,7 +91,7 @@ public class LineMakerScript : MonoBehaviour {
             }
             else if (Input.GetMouseButton(0)) //drag
             {
-                Vector3 end = new Vector3(mousePos.x, mousePos.y, 0);
+                Vector3 end = currentPos;
 
                 lr.SetPosition(1, end);
                 transformCollider(lr);
@@ -91,7 +100,11 @@ public class LineMakerScript : MonoBehaviour {
             {
                 transformCollider(lr);
 
-                if(myLines.Count == maxLines)
+                GameObject prefab = Instantiate(pointPrefab);
+                prefab.transform.position = currentPos;
+                points.Add(prefab.GetComponent<LineDataPointController>());
+
+                if (myLines.Count == maxLines)
                 {
                     done = true;
                     GC.checkDone();

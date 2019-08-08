@@ -7,11 +7,7 @@ using UnityEngine.UI;
 
 public class HTTPController : MonoBehaviour {
 
-    //public int maxsec = 0;
-
     public ConfigWrapper config;
-
-    //current format: id (varchar), try_nr (int), point1, point2, ... point8 (varchar)
 
     private void Awake()
     {
@@ -24,7 +20,7 @@ public class HTTPController : MonoBehaviour {
         }
         DontDestroyOnLoad(this.gameObject);
 
-        //get URL once
+        //get config once
         StartCoroutine(getConfig());
     }
 
@@ -48,7 +44,6 @@ public class HTTPController : MonoBehaviour {
             Debug.Log("Received: \n" + uwr.downloadHandler.text);
 
             config = ConfigWrapper.CreateFromJSON(uwr.downloadHandler.text);
-            //url = url.Replace("\"", "");
             Debug.Log("URL: " + config.URL);
             Debug.Log("MAX_SEC: " + config.MAX_SEC);
             Debug.Log("SHOW_TIMER: " + config.SHOW_TIMER);
@@ -58,13 +53,21 @@ public class HTTPController : MonoBehaviour {
 
     public void sendOne(string id, int trynr, ProblemTry pt)
     {
+        //All in one json package
         string json = "{\"player_id\": \"" + id + "\"" + ", " + "\"try_nr\": \"" + trynr + "\"";
         int index = 1;
-        foreach (Vector2 coord in pt.points)
+        foreach (Vector2 coord in pt.positions)
         {
             json += ", \"point" + index + "\": \"" + coord + "\"";
             index++;
         }
+        index = 1;
+        foreach (string nodeName in pt.nodes)
+        {
+            json += ", \"node" + index + "\": \"" + nodeName + "\"";
+            index++;
+        }
+        json += ", \"accepted\": \"" + pt.accepted + "\"";
         json += "}";
         print("json: " + json);
 

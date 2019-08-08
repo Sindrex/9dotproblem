@@ -6,14 +6,11 @@ using UnityEngine;
 public class ProblemTry {
 
     [SerializeField]
-    public List<Vector2> points; // 0-8 points in space
+    public List<Vector2> positions; // 0-5 points in space
 
-    public ProblemTry(List<Vector2> myPoints)
-    {
-        if(myPoints.Count > 8)
-        {
-            throw new System.Exception("Too many points! Should be max 2 * 4");
-        }
-        points = myPoints;
-    }
+    [SerializeField]
+    public List<string> nodes; // 0-5 nodes in space, e.g. "A1"
+
+    [SerializeField]
+    public bool accepted;
 }

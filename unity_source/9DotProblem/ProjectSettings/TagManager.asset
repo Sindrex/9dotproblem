@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Button
+  - DataGrid
+  - Dot
   layers:
   - Default
   - TransparentFX
