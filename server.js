@@ -30,9 +30,18 @@ app.get("/id=:id", (req, res) => {
 //post data
 app.post("/api/9dotproblem", (req, res) => {
   console.log("/api/9dotproblem got POST request from client");
-  new DaoWrapper(pool).createOne(req.body, (status, data) => {
-    res.status(status);
-    res.json(data);
+  console.log("json: " + req.body);
+  new DaoWrapper(pool).createOneRaw(req.body, (status, data) => {
+    if(status == 200){
+      new DaoWrapper(pool).createOneConv(req.body, (status, data) => {
+        res.status(status);
+        res.json(data);
+      });
+    }
+    else{
+      res.status(status);
+      res.json(data);
+    }
   });
 });
 
