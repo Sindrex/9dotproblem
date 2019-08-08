@@ -17,7 +17,7 @@ module.exports = class DaoWrapper extends Dao {
   }
   createOneConv(json, callback) {
     var valConv = [json.player_id, json.try_nr, json.node1, json.node2, json.node3,
-                  json.node4, json.node5, json.accepted];
+                  json.node4, json.node5, json.accepted == 'True' ? '1' : '0'];
     super.query(
       "insert into 9dotproblemConv (player_id, try_nr, node1, node2, node3, " +
       "node4, node5, accepted) values (?,?,?,?,?,?,?,?)",
