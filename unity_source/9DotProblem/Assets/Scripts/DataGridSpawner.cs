@@ -9,6 +9,7 @@ public class DataGridSpawner : MonoBehaviour {
     public Vector3 start;
     public Vector3 addition;
     public int rowCount;
+    public bool debugNames;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +25,10 @@ public class DataGridSpawner : MonoBehaviour {
             for(int j = 0; j < prefab.transform.childCount; j++)
             {
                 Transform child = prefab.transform.GetChild(j);
-                child.name = "" + rowName + (j + 1);
+                string name = "" + rowName + (j + 1);
+                child.name = name;
+                child.GetChild(0).GetComponent<TextMesh>().text = name;
+                child.GetChild(0).gameObject.SetActive(debugNames);
             }
 
             rowName++;

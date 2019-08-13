@@ -31,6 +31,7 @@ public class LineMakerScript : MonoBehaviour {
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+            bool hitButton = false;
             RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos, new Vector3(0, 0, -1), 100F);
             foreach(RaycastHit2D hit in hits)
             {
@@ -38,6 +39,7 @@ public class LineMakerScript : MonoBehaviour {
                 if (hit.transform.CompareTag(buttonTag))
                 {
                     //print("hit button");
+                    hitButton = true;
                     return;
                 }
             }

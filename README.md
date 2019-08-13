@@ -8,16 +8,17 @@ Summer 2019
 ## About
 This project is a digitalization of the "9 Dot Problem", a puzzle used to analyze psychological phenomena. The user must think "outside the box" to be able to solve the puzzle.
 
-The product consists of:
+The project consists of:
  * A configurable NodeJS HTTP server.
  * A Unity WebGL exported game simulating the puzzle.
  * Source Code for the Unity game.
  * Initialization script for the database.
+ * Diagram of the game space and data nodes.
 
 Trello board: https://trello.com/b/rl18dEEW/bi-9-dot-problem
 
-## Installation and Running
-### Download and Install
+## Installation and running
+### Download and install
 Download the project or clone the repo:
 `npm i https://github.com/Sindrex/9dotproblem`  
 
@@ -51,4 +52,18 @@ Programs used to run:
 The has a simple structure, due to its low size.
  * In the top folder you will find the server, the config file, dao files, the DB initialization script ("sqltableinit.txt").
  * Under "/public" you will find the index.html file hosted by the server. This file has an iframe hosting the game. You will find the Unity WebGL exported game under "/public/game".
- * Under "/unity_source" you will find the game's source code. This should be able to be opened by the Unity editor.
+ * Under "/unity_source" you will find the game's source code. This should be able to be opened by the Unity editor (version 2017.3.1f1).
+
+## Understanding the database
+The database consists of 2 tables:
+ * Raw data: Stored in the 9dotproblemRaw table. Coordinates (x,y) of the points in game space clicked by the user. The game space is a coordinate system where (0,0) is in the bottom-left corner and (17.9, 17.6) is the top-right corner. *Note that this is the full area the user can draw in, and not just what is seen from the camera during gameplay.* The dots have a radius of 0.4 and their coordinates are as follows (see data diagram for dots' identities):
+  * 1: (6.9, 6.6)
+  * 2: (8.9, 6.6)
+  * 3: (10.9, 6.6)
+  * 4: (6.9, 8.6)
+  * 5: (8.9, 8.6)
+  * 6: (10.9, 8.6)
+  * 7: (6.9, 10.6)
+  * 8: (8.9, 10.6)
+  * 9: (10.9, 10.6)
+ * Converted data: Stored in the 9dotproblemConv table. Contains the raw data converted to what area they fit in (each area is called a 'node'). See data diagram for all the nodes. Also contains an 'accepted' field to say if the user managed to draw through all nine dots.
