@@ -54,7 +54,9 @@ app.get("/game/StreamingAssets", (req, res) => {
       "URL":config.URL + "/api/9dotproblem",
       "MAX_SEC":config.MAX_SEC,
       "SHOW_TIMER":config.SHOW_TIMER,
-      "HELP_TEXT":config.HELP_TEXT
+      "HELP_TEXT":config.HELP_TEXT,
+      "REDIRECT_URL":config.REDIRECT_URL,
+      "REDIRECT_TIME":config.REDIRECT_TIME
   });
   console.log("Sent URL: " + config.URL + "/api/9dotproblem");
 });

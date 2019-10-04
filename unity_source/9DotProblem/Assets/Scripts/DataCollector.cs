@@ -9,6 +9,7 @@ public class DataCollector : MonoBehaviour {
 
     public string playerID = "temp";
     public bool urlOK = false;
+    public bool redirect;
 
     [SerializeField]
     public List<ProblemTry> tries;
@@ -34,11 +35,28 @@ public class DataCollector : MonoBehaviour {
         //URL stuff
         string url = GetURL();
         Debug.Log("URL gotten: " + url);
-        if (url.Contains("id=")) //might be changed to "?id="
+
+        string[] parameters = url.Split('?')[1].Split('&');
+
+        if (parameters.Length > 0)
         {
             urlOK = true;
-            playerID = url.Split('=')[1];
+            playerID = parameters[0].Split('=')[1];
             Debug.Log("ID sat to: " + playerID);
+
+            if (parameters.Length > 1)
+            {
+                string redirectString = parameters[1].Split('=')[1];
+                if (redirectString.Equals("true"))
+                {
+                    redirect = true;
+                }
+                else
+                {
+                    redirect = false;
+                }
+                Debug.Log("Redirect: " + redirect);
+            }
         }
         else
         {

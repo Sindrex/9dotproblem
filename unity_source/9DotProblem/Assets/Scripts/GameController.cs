@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour {
 
     public float waitWhenCheckDone = 0.5f;
     public GameObject winText;
+    public Text redirectText;
     public bool accepted;
 
     public HTTPController http;
@@ -27,6 +29,9 @@ public class GameController : MonoBehaviour {
     {
         winText.SetActive(false);
         data.trySent = false;
+        string s = "a?abc=d"; //&efg=h
+        string[] par = s.Split('?')[1].Split('&');
+        print(par[0] + " - ");
     }
 
     public void checkDone()
@@ -61,10 +66,33 @@ public class GameController : MonoBehaviour {
             Debug.Log("no win :c");
         }
         addPoints();
+
+        if (data.redirect)
+        {
+            if (!http.config.REDIRECT_URL.Trim().Equals(""))
+            {
+                StartCoroutine(redirectWait(http.config.REDIRECT_URL, http.config.REDIRECT_TIME));
+            }
+            else
+            {
+                Debug.Log("Error: Redirect URL is null");
+            }
+        }
     }
 
     public void addPoints()
     {
         data.add(lineMaker.points, accepted, http);
+    }
+
+    IEnumerator redirectWait(string url, int waitTime)
+    {
+        for (int i = 1; i <= waitTime; i++)
+        {
+            redirectText.text = "You will be redirected in " + (waitTime - i) + "...";
+            yield return new WaitForSeconds(1);
+        }
+
+        Application.OpenURL(url);
     }
 }

@@ -67,3 +67,27 @@ The database consists of 2 tables:
    * 8: (8.9, 10.6)
    * 9: (10.9, 10.6)
  * Converted data: Stored in the 9dotproblemConv table. Contains the raw data converted to what area they fit in (each area is called a 'node'). See data diagram for all the nodes. Also contains an 'accepted' field to say if the user managed to draw through all nine dots.
+
+## Integration with Qualtrics
+Valid as of 02.10.2019.
+
+This system has support for Qualtrics in two ways: It can redirect the user to a Qualtrics survey at the end of their test and pass along their ID, and it can be redirected to from a Qualtrics survey and recieve the participant's assigned ID from there.
+
+There are multiple ways of doing this, but we will show a way to integrate with Qualtrics so both of these options are possible.
+
+### How to integrate with Qualtrics
+  1. Create a survey in Qualtrics.
+  2. Open up "Survey Flow".
+  3. Add a new element. Click "Embedded Data".
+  5. From the dropdown choose "Survey Metadata" -> "ResponseID".
+  6. Add a new field to the same block. Call it "id". *Do not set a custom value for it*.
+  7. Add a new element. Click "Branch".
+  8. Add a condition to the branch. Under "Question" select "Embedded Data". In the left inputfield, write "id". In the middle dropdown select "Is Empty".
+  9. Add a new element underneath the branch (so that the branch goes there). Click "Embedded Data".
+  10. From the dropdown choose "Existing Embedded Data" -> "id".
+  11. Click "Set a Value Now" for "id". Write "${e://Field/ResponseID}"
+  12. Click "Save Flow".
+  13. Open up "Survey Options".
+  14. Under "Survey Termination", select "Redirect".
+  15. In the redirect input box, enter the following: The URL the server is hosted on, e.g. "https://ninedotproblem.herokuapp.com/". *Remember to get the "/" at the end*. Then add the following field at the end of the URL: "?id=${e://Field/id}".
+  16. Save, publish and you are done!

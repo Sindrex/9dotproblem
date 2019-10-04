@@ -48,6 +48,7 @@ public class HTTPController : MonoBehaviour {
             Debug.Log("MAX_SEC: " + config.MAX_SEC);
             Debug.Log("SHOW_TIMER: " + config.SHOW_TIMER);
             Debug.Log("HELP_TEXT: " + config.HELP_TEXT);
+            Debug.Log("REDIRECT_URL: " + config.REDIRECT_URL);
         }
     }
 
@@ -105,6 +106,8 @@ public class ConfigWrapper
     public int MAX_SEC;
     public bool SHOW_TIMER;
     public string HELP_TEXT;
+    public string REDIRECT_URL;
+    public int REDIRECT_TIME;
 
     public static ConfigWrapper CreateFromJSON(string jsonString)
     {
