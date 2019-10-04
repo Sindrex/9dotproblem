@@ -8,7 +8,7 @@ var QueryHandler = {
         var buffer = _malloc(bufferSize);
         stringToUTF8(returnStr, buffer, bufferSize);
         return buffer;
-    }
+    },
     OpenURL: function(url){
       url = Pointer_stringify(url);
       console.log('Opening link: ' + url);

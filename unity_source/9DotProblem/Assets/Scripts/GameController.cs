@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
     public TimerScript timer;
 
     [DllImport("__Internal")]
-    private static extern string OpenURL(string url);
+    private static extern void OpenURL(string url);
 
     private void Awake()
     {
@@ -107,6 +107,6 @@ public class GameController : MonoBehaviour {
         }
 
         //Application.OpenURL(url);
-        OpenURL(url + "?id=" + data.playerID);
+        OpenURL(url + "/?id=" + data.playerID);
     }
 }
