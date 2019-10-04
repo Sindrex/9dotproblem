@@ -77,9 +77,9 @@ This system has support for Qualtrics in two ways:
  1. It can redirect the user to a Qualtrics survey at the end of their test and pass along their ID.
  2. Qualtrics can redirect to the system and pass along the user's ID and whether or not the system shall redirect
 
-Here's one way to integrate with Qualtrics so both of these options are possible.
+Here's one way to integrate with Qualtrics so both of these options are possible. *Note: The system cannot redirect to the same survey as redirected to itself.*
 
-### How to setup Qualtrics
+### How to setup Qualtrics -> Website
   1. Create a survey in Qualtrics.
   2. Open up "Survey Flow".
   3. Add a new element. Click "Embedded Data".

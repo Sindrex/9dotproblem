@@ -14,16 +14,16 @@ public class LineDataPointController : MonoBehaviour {
     {
         if (!collided)
         {
-            print("Collided with: " + collision.name);
+            //print("Collided with: " + collision.name);
             if (collision.CompareTag(dataGridTag))
             {
-                print("Setting node: " + collision.name);
+                //print("Setting node: " + collision.name);
                 nodeName = collision.name;
                 collided = true;
             }
             else if (collision.CompareTag(dotTag))
             {
-                print("Setting node: " + collision.name);
+                //print("Setting node: " + collision.name);
                 nodeName = collision.name;
                 collided = true;
                 prioSwapped = true;

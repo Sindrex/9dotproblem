@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
     public float waitWhenCheckDone = 0.5f;
     public GameObject winText;
     public Text redirectText;
+    public InputField copyText;
     public bool accepted;
 
     public HTTPController http;
@@ -107,6 +108,10 @@ public class GameController : MonoBehaviour {
         }
 
         //Application.OpenURL(url);
-        OpenURL(url + "/?id=" + data.playerID);
+        string fullURL = url + "/?id=" + data.playerID;
+        OpenURL(fullURL);
+
+        redirectText.text = "If you are not redirected, please copy:";
+        copyText.text = fullURL;
     }
 }
