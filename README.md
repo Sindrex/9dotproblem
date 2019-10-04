@@ -36,6 +36,8 @@ There is a single JSON formatted file called "config.json". It has the following
  * **MAX_SEC:** The number of *seconds* a user has to do the test. Must be an integer larger than 0.
  * **SHOW_TIMER:** Whether or not the timer should be shown. Set with either *"true"* or *"false"*.
  * **HELP_TEXT:** What text the help button should show. A text string of maximum 450 characters including spaces.
+ * **REDIRECT_URL:** The URL to where the user will be redirected after the test is over. Set empty if you do not want the user to be directed. *Note: you also have to access the website with the parameter "redirect=true" for the user to be redirected.*
+ * **REDIRECT_TIME:** The number of *seconds* from the test is finished till the user is redirected to the REDIRECT_URL.
 
  *Note: the database needs to be an SQL database, preferrably using Mysql.*
 
@@ -71,11 +73,13 @@ The database consists of 2 tables:
 ## Integration with Qualtrics
 Valid as of 02.10.2019.
 
-This system has support for Qualtrics in two ways: It can redirect the user to a Qualtrics survey at the end of their test and pass along their ID, and it can be redirected to from a Qualtrics survey and recieve the participant's assigned ID from there.
+This system has support for Qualtrics in two ways:
+ 1. It can redirect the user to a Qualtrics survey at the end of their test and pass along their ID.
+ 2. Qualtrics can redirect to the system and pass along the user's ID and whether or not the system shall redirect
 
-There are multiple ways of doing this, but we will show a way to integrate with Qualtrics so both of these options are possible.
+Here's one way to integrate with Qualtrics so both of these options are possible.
 
-### How to integrate with Qualtrics
+### How to setup Qualtrics
   1. Create a survey in Qualtrics.
   2. Open up "Survey Flow".
   3. Add a new element. Click "Embedded Data".
@@ -90,4 +94,5 @@ There are multiple ways of doing this, but we will show a way to integrate with 
   13. Open up "Survey Options".
   14. Under "Survey Termination", select "Redirect".
   15. In the redirect input box, enter the following: The URL the server is hosted on, e.g. "https://ninedotproblem.herokuapp.com/". *Remember to get the "/" at the end*. Then add the following field at the end of the URL: "?id=${e://Field/id}".
-  16. Save, publish and you are done!
+  16. OPTIONAL: If you want the 9dotproblem system to redirect to it's REDIRECT_URL, add "&redirect=true" at the end of the URL. *Note: remember to set the system's config REDIRECT_URL if you want it to redirect the user after a completed test.*
+  17. Save, publish and you are done!

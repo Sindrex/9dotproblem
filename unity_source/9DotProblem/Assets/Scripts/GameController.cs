@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ public class GameController : MonoBehaviour {
     public HTTPController http;
     public DataCollector data;
     public TimerScript timer;
+
+    [DllImport("__Internal")]
+    private static extern string OpenURL(string url);
 
     private void Awake()
     {
@@ -102,6 +106,7 @@ public class GameController : MonoBehaviour {
             yield return new WaitForSeconds(1);
         }
 
-        Application.OpenURL(url);
+        //Application.OpenURL(url);
+        OpenURL(url + "?id=" + data.playerID);
     }
 }
