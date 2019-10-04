@@ -101,6 +101,8 @@ public class GameController : MonoBehaviour {
 
     IEnumerator redirectWait(string url, int waitTime)
     {
+        string fullURL = url + "/?id=" + data.playerID;
+        copyText.text = fullURL;
         for (int i = 1; i <= waitTime; i++)
         {
             redirectText.text = "You will be redirected in " + (waitTime - i) + "...";
@@ -108,10 +110,8 @@ public class GameController : MonoBehaviour {
         }
 
         //Application.OpenURL(url);
-        string fullURL = url + "/?id=" + data.playerID;
         OpenURL(fullURL);
 
         redirectText.text = "If you are not redirected, please copy:";
-        copyText.text = fullURL;
     }
 }

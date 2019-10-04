@@ -79,20 +79,28 @@ This system has support for Qualtrics in two ways:
 
 Here's one way to integrate with Qualtrics so both of these options are possible. *Note: The system cannot redirect to the same survey as redirected to itself.*
 
-### How to setup Qualtrics -> Website
+### How to setup Qualtrics redirect to 9dotproblem
   1. Create a survey in Qualtrics.
   2. Open up "Survey Flow".
   3. Add a new element. Click "Embedded Data".
   5. From the dropdown choose "Survey Metadata" -> "ResponseID".
-  6. Add a new field to the same block. Call it "id". *Do not set a custom value for it*.
-  7. Add a new element. Click "Branch".
-  8. Add a condition to the branch. Under "Question" select "Embedded Data". In the left inputfield, write "id". In the middle dropdown select "Is Empty".
-  9. Add a new element underneath the branch (so that the branch goes there). Click "Embedded Data".
-  10. From the dropdown choose "Existing Embedded Data" -> "id".
-  11. Click "Set a Value Now" for "id". Write "${e://Field/ResponseID}"
-  12. Click "Save Flow".
-  13. Open up "Survey Options".
-  14. Under "Survey Termination", select "Redirect".
-  15. In the redirect input box, enter the following: The URL the server is hosted on, e.g. "https://ninedotproblem.herokuapp.com/". *Remember to get the "/" at the end*. Then add the following field at the end of the URL: "?id=${e://Field/id}".
-  16. OPTIONAL: If you want the 9dotproblem system to redirect to it's REDIRECT_URL, add "&redirect=true" at the end of the URL. *Note: remember to set the system's config REDIRECT_URL if you want it to redirect the user after a completed test.*
-  17. Save, publish and you are done!
+  6. Click "Save Flow".
+  7. Open up "Survey Options".
+  8. Under "Survey Termination", select "Redirect".
+  9. In the redirect input box, enter the following: The URL the server is hosted on, e.g. "https://ninedotproblem.herokuapp.com/". *Remember to get the "/" at the end*. Then add the following field at the end of the URL: "?id=${e://Field/ResponseID}".
+  10. OPTIONAL: If you want the 9dotproblem system to redirect to it's REDIRECT_URL, add "&redirect=true" at the end of the URL. *Note: remember to set the system's config REDIRECT_URL if you want it to redirect the user after a completed test.*
+  11. Save, publish and you are done! This survey will now redirect to the 9dotproblem system.
+
+### How to setup 9dotproblem redirect to qualtrics
+  1. Create a survey in Qualtrics.
+  2. Open up "Survey Flow".
+  3. Add a new element. Click "Embedded Data".
+  4. From the dropdown choose "Survey Metadata" -> "ResponseID".
+  5. Add a new field to the same block. Call it "id". *Do not set a custom value for it*.
+  6. Add a new element. Click "Branch".
+  7. Add a condition to the branch. Under "Question" select "Embedded Data". In the left inputfield, write "id". In the middle dropdown select "Is Empty".
+  8. Add a new element underneath the branch (so that the branch goes there). Click "Embedded Data".
+  9. From the dropdown choose "Existing Embedded Data" -> "id".
+  10. Click "Set a Value Now" for "id". Write "${e://Field/ResponseID}"
+  11. Click "Save Flow".
+  12. Publish and you are done! This survey will now use the ID gotten from the 9dotproblem system.
