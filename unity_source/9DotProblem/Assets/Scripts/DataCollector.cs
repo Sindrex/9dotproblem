@@ -37,14 +37,19 @@ public class DataCollector : MonoBehaviour {
         Debug.Log("URL gotten: " + url);
 
         string[] parameters = url.Split('?')[1].Split('&');
+        Debug.Log("Params:");
+        foreach(string s in parameters)
+        {
+            Debug.Log(s);
+        }
 
-        if (parameters.Length > 0)
+        if (parameters[0].Contains("id="))
         {
             urlOK = true;
             playerID = parameters[0].Split('=')[1];
             Debug.Log("ID sat to: " + playerID);
 
-            if (parameters.Length > 1)
+            if (parameters.Length > 1 && parameters[1].Contains("redirect="))
             {
                 string redirectString = parameters[1].Split('=')[1];
                 if (redirectString.Equals("true"))
@@ -55,8 +60,8 @@ public class DataCollector : MonoBehaviour {
                 {
                     redirect = false;
                 }
-                Debug.Log("Redirect: " + redirect);
             }
+            Debug.Log("Redirect: " + redirect);
         }
         else
         {
