@@ -37,11 +37,12 @@ public class DataCollector : MonoBehaviour {
         Debug.Log("URL gotten: " + url);
 
         string[] parameters = url.Split('?')[1].Split('&');
+        /*
         Debug.Log("Params:");
         foreach(string s in parameters)
         {
             Debug.Log(s);
-        }
+        }*/
 
         if (parameters[0].Contains("id="))
         {

@@ -59,6 +59,7 @@ public class GameController : MonoBehaviour {
             ui.setNonInteractableButtons();
             timer.takeTime = false;
             this.accepted = true;
+            redirect();
         }
         else
         {
@@ -66,7 +67,10 @@ public class GameController : MonoBehaviour {
             Debug.Log("no win :c");
         }
         addPoints();
+    }
 
+    public void redirect()
+    {
         if (data.redirect)
         {
             if (!http.config.REDIRECT_URL.Trim().Equals(""))
@@ -75,8 +79,13 @@ public class GameController : MonoBehaviour {
             }
             else
             {
+                redirectText.gameObject.SetActive(false);
                 Debug.Log("Error: Redirect URL is null");
             }
+        }
+        else
+        {
+            redirectText.gameObject.SetActive(false);
         }
     }
 
