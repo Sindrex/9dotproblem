@@ -55,7 +55,7 @@ public class HTTPController : MonoBehaviour {
     public void sendOne(string id, int trynr, ProblemTry pt)
     {
         //All in one json package
-        string json = "{\"player_id\": \"" + id + "\"" + ", " + "\"try_nr\": \"" + trynr + "\"";
+        string json = "{" + "\"created_at\": \"" + System.DateTime.Now + "\", " + "\"player_id\": \"" + id + "\", " + "\"try_nr\": \"" + trynr + "\"";
         int index = 1;
         foreach (Vector2 coord in pt.positions)
         {

@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS 9dotproblemConv;
 
 CREATE TABLE 9dotproblemRaw (
 	sequence_nr INT(11) NOT NULL AUTO_INCREMENT,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	player_id VARCHAR(11) NOT NULL,
 	try_nr INT(11) NOT NULL,
 	point1 VARCHAR(32),
@@ -14,11 +15,9 @@ CREATE TABLE 9dotproblemRaw (
 	PRIMARY KEY (sequence_nr)
 );
 
-ALTER TABLE 9dotproblemRaw
-  ADD CONSTRAINT 9dotproblemRaw UNIQUE(player_id, try_nr);
-
 CREATE TABLE 9dotproblemConv (
 	sequence_nr INT(11) NOT NULL AUTO_INCREMENT,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	player_id VARCHAR(11) NOT NULL,
 	try_nr INT(11) NOT NULL,
 	node1 VARCHAR(32),
@@ -29,6 +28,3 @@ CREATE TABLE 9dotproblemConv (
 	accepted BIT,
 	PRIMARY KEY (sequence_nr)
 );
-
-ALTER TABLE 9dotproblemConv
-  ADD CONSTRAINT 9dotproblemConv UNIQUE(player_id, try_nr);
