@@ -75,9 +75,9 @@ Valid as of 02.10.2019.
 
 This system has support for Qualtrics in two ways:
  1. It can redirect the user to a Qualtrics survey at the end of their test and pass along their ID.
- 2. Qualtrics can redirect to the system and pass along the user's ID and whether or not the system shall redirect
+ 2. Qualtrics can redirect to the system and pass along the user's ID and whether or not the system shall redirect at the end of the test.
 
-Here's one way to integrate with Qualtrics so both of these options are possible. *Note: The system cannot redirect to the same survey as redirected to itself.*
+Here's one way to integrate with Qualtrics so both of these options are possible. *Note: The system cannot redirect to the same survey as redirected to itself. There has to be two seperate surveys if you want to redirect to the system and want the system to redirect at the end of the test.*
 
 ### How to setup Qualtrics redirect to 9dotproblem
   1. Create a survey in Qualtrics.
@@ -91,7 +91,7 @@ Here's one way to integrate with Qualtrics so both of these options are possible
   10. OPTIONAL: If you want the 9dotproblem system to redirect to it's REDIRECT_URL, add "&redirect=true" at the end of the URL. *Note: remember to set the system's config REDIRECT_URL if you want it to redirect the user after a completed test.*
   11. Save, publish and you are done! This survey will now redirect to the 9dotproblem system.
 
-### How to setup 9dotproblem redirect to qualtrics
+### How to setup 9dotproblem redirect to Qualtrics
   1. Create a survey in Qualtrics.
   2. Open up "Survey Flow".
   3. Add a new element. Click "Embedded Data".
