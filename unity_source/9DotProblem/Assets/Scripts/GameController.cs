@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
 
     public float waitWhenCheckDone = 0.5f;
     public GameObject winText;
+    public GameObject tryAgainText;
     public Text redirectText;
     public InputField copyText;
     public bool accepted;
@@ -33,10 +34,8 @@ public class GameController : MonoBehaviour {
     private void Start()
     {
         winText.SetActive(false);
+        tryAgainText.SetActive(false);
         data.trySent = false;
-        string s = "a?abc=d"; //&efg=h
-        string[] par = s.Split('?')[1].Split('&');
-        print(par[0] + " - ");
     }
 
     public void checkDone()
@@ -70,17 +69,18 @@ public class GameController : MonoBehaviour {
         {
             //4 lines but no win
             Debug.Log("no win :c");
+            tryAgainText.SetActive(true);
         }
         addPoints();
     }
 
     public void redirect()
     {
-        if (data.redirect)
+        if (data.doRedirect)
         {
-            if (!http.config.REDIRECT_URL.Trim().Equals(""))
+            if (!http.config.RedirectUrl.Trim().Equals(""))
             {
-                StartCoroutine(redirectWait(http.config.REDIRECT_URL, http.config.REDIRECT_TIME));
+                StartCoroutine(redirectWait(http.config.RedirectUrl, http.config.RedirectTime));
             }
             else
             {

@@ -12,10 +12,15 @@ public class StartScript : MonoBehaviour {
     public DataCollector data;
     public CamLerper lerper;
 
+    public Text titleText;
+    public HTTPController http;
+
     private void Start()
     {
         playButton.interactable = false;
         data = GameObject.Find("DataCollector").GetComponent<DataCollector>();
+        titleText.text = "";
+        http.onConfigDownloaded.Add(() => titleText.text = http.config.Title);
     }
 
     //For testing

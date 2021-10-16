@@ -248,7 +248,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 9 DOT PROBLEM
+  m_Text: One-Stroke Puzzle
 --- !u!222 &493130481
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -647,6 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 
   urlOK: 0
+  redirect: 0
   tries: []
   trySent: 0
 --- !u!1 &945712350
@@ -681,6 +682,8 @@ MonoBehaviour:
     MAX_SEC: 0
     SHOW_TIMER: 0
     HELP_TEXT: 
+    REDIRECT_URL: 
+    REDIRECT_TIME: 0
 --- !u!4 &945712352
 Transform:
   m_ObjectHideFlags: 0
@@ -835,7 +838,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play
+  m_Text: Start
 --- !u!222 &1261326213
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1135,7 +1138,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2019
+  m_Text: 2019-2021
 --- !u!222 &1712662229
 CanvasRenderer:
   m_ObjectHideFlags: 0

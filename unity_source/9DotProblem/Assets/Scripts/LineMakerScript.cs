@@ -16,6 +16,7 @@ public class LineMakerScript : MonoBehaviour {
 
     public string buttonTag;
 
+    public GameObject lineParent;
     public GameObject pointPrefab;
     public List<LineDataPointController> points;
 
@@ -31,15 +32,11 @@ public class LineMakerScript : MonoBehaviour {
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            bool hitButton = false;
             RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos, new Vector3(0, 0, -1), 100F);
             foreach(RaycastHit2D hit in hits)
             {
-                //print(hit.transform.tag + "/" + hit.transform.name);
                 if (hit.transform.CompareTag(buttonTag))
                 {
-                    //print("hit button");
-                    hitButton = true;
                     return;
                 }
             }
@@ -49,10 +46,9 @@ public class LineMakerScript : MonoBehaviour {
             {
                 Debug.Log("Making line!");
                 GameObject myLine = new GameObject("Line" + myLines.Count);
+                myLine.transform.parent = lineParent.transform;
                 myLine.AddComponent<LineRenderer>();
                 lr = myLine.GetComponent<LineRenderer>();
-
-                //lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
 
                 lr.startWidth = lineWidth;
                 lr.endWidth = lineWidth;
@@ -70,7 +66,7 @@ public class LineMakerScript : MonoBehaviour {
                     lr.SetPosition(0, startPos);
                     lr.SetPosition(1, startPos);
 
-                    GameObject prefab = Instantiate(pointPrefab);
+                    GameObject prefab = Instantiate(pointPrefab, lineParent.transform);
                     prefab.transform.position = startPos;
                     points.Add(prefab.GetComponent<LineDataPointController>());
                 }
@@ -102,7 +98,7 @@ public class LineMakerScript : MonoBehaviour {
             {
                 transformCollider(lr);
 
-                GameObject prefab = Instantiate(pointPrefab);
+                GameObject prefab = Instantiate(pointPrefab, lineParent.transform);
                 prefab.transform.position = currentPos;
                 points.Add(prefab.GetComponent<LineDataPointController>());
 

@@ -24,7 +24,6 @@ public class UIController : MonoBehaviour {
     public TimerScript timer;
     public GameObject timerWrapper;
     public Text timerFull;
-    public Text timerCurrent;
     public GameObject timeUpText;
 
     public CamLerper lerper;
@@ -37,11 +36,13 @@ public class UIController : MonoBehaviour {
         timer = GC.timer;
 
         //config
-        helpText.text = GC.http.config.HELP_TEXT;
-        maxsec = GC.http.config.MAX_SEC;
-        if (!GC.http.config.SHOW_TIMER)
+        helpText.text = GC.http.config.HelpText;
+        maxsec = GC.http.config.TimeLimitSeconds;
+        timerWrapper.SetActive(false);
+        if (GC.http.config.ShowTimer || GC.data.showTimer)
         {
-            timerWrapper.SetActive(false);
+            print(GC.http.config.ShowTimer);
+            timerWrapper.SetActive(true);
         }
 
         if (GC.data.tries.Count <= 0)
@@ -61,8 +62,7 @@ public class UIController : MonoBehaviour {
     private void Update () {
         lineCount.text = "" + (lineMaker.maxLines - lineMaker.myLines.Count);
 
-        timerFull.text = "" + FormatTime(timer.fullTimer);
-        timerCurrent.text = "" + FormatTime(timer.curTimer);
+        timerFull.text = "" + FormatTime(maxsec - timer.fullTimer);
         if(timer.fullTimer >= maxsec && maxsec > 0 && timer.takeTime) //check if maxtime is surpassed and maxtime is gotten (not 0).
         {
             Debug.Log("Time's up Sunny!");

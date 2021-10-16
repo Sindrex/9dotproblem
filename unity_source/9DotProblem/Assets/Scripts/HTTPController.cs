@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 public class HTTPController : MonoBehaviour {
 
     public ConfigWrapper config;
+    public List<Action> onConfigDownloaded;
 
     private void Awake()
     {
@@ -43,12 +45,19 @@ public class HTTPController : MonoBehaviour {
         {
             Debug.Log("Received: \n" + uwr.downloadHandler.text);
 
-            config = ConfigWrapper.CreateFromJSON(uwr.downloadHandler.text);
-            Debug.Log("URL: " + config.URL);
-            Debug.Log("MAX_SEC: " + config.MAX_SEC);
-            Debug.Log("SHOW_TIMER: " + config.SHOW_TIMER);
-            Debug.Log("HELP_TEXT: " + config.HELP_TEXT);
-            Debug.Log("REDIRECT_URL: " + config.REDIRECT_URL);
+            var tempconfig = ConfigWrapper.CreateFromJSON(uwr.downloadHandler.text);
+            Debug.Log("URL: " + tempconfig.Url);
+            Debug.Log("MAX_SEC: " + tempconfig.TimeLimitSeconds);
+            Debug.Log("SHOW_TIMER: " + tempconfig.ShowTimer);
+            Debug.Log("HELP_TEXT: " + tempconfig.HelpText);
+            Debug.Log("REDIRECT_URL: " + tempconfig.RedirectUrl);
+
+            config = tempconfig;
+
+            foreach(Action a in onConfigDownloaded)
+            {
+                a();
+            }
         }
     }
 
@@ -77,9 +86,9 @@ public class HTTPController : MonoBehaviour {
 
     IEnumerator sendPOST(string json)
     {
-        print("Sending post req to: " + config.URL + "\nSending: " + json);
-
-        var uwr = new UnityWebRequest(config.URL, "POST");
+        print("Sending post req to: " + config.Url + "\nSending: " + json);
+        //yield return new WaitForSeconds(1);
+        var uwr = new UnityWebRequest(config.Url, "POST");
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
         uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
         uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -96,21 +105,5 @@ public class HTTPController : MonoBehaviour {
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
         }
-    }
-}
-
-[System.Serializable]
-public class ConfigWrapper
-{
-    public string URL;
-    public int MAX_SEC;
-    public bool SHOW_TIMER;
-    public string HELP_TEXT;
-    public string REDIRECT_URL;
-    public int REDIRECT_TIME;
-
-    public static ConfigWrapper CreateFromJSON(string jsonString)
-    {
-        return JsonUtility.FromJson<ConfigWrapper>(jsonString);
     }
 }

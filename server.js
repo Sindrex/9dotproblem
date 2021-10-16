@@ -13,10 +13,10 @@ const DaoWrapper = require("./daowrapper.js");
 
 var pool = mysql.createPool({
   connectionLimit: 5,
-  host: config.DATABASE_HOST,
-  user: config.DATABASE_USER,
-  password: config.DATABASE_PASS,
-  database: config.DATABASE_DB,
+  host: config.DatabaseHost,
+  user: config.DatabaseUser,
+  password: config.DatabasePass,
+  database: config.DatabaseDB,
   debug: false,
   multipleStatements: true
 });

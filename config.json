@@ -1,12 +1,14 @@
 {
-  "DATABASE_HOST":"mysql.stud.iie.ntnu.no",
-  "DATABASE_USER":"sindrhpa",
-  "DATABASE_PASS":"N6BrO07y",
-  "DATABASE_DB":"sindrhpa",
-  "URL":"https://ninedotproblem.herokuapp.com",
-  "MAX_SEC":60,
-  "SHOW_TIMER":true,
-  "HELP_TEXT":"Draw four consecutive lines through all nine circles.",
-  "REDIRECT_URL":"https://bino.qualtrics.com/jfe/form/SV_5nkEuIvT2Cn3rIF",
-  "REDIRECT_TIME":10
+  "DatabaseHost":"mysql.stud.iie.ntnu.no",
+  "DatabaseUser":"sindrhpa",
+  "DatabasePass":"N6BrO07y",
+  "DatabaseDB":"sindrhpa",
+  "Url":"https://ninedotproblem.herokuapp.com",
+  "TimeLimitSeconds":60,
+  "ShowTimer":true,
+  "HelpText":"Draw four consecutive lines through all nine circles.",
+  "ShowHelpText":true,
+  "Title":"One-Stroke Puzzle",
+  "RedirectUrl":"https://bino.qualtrics.com/jfe/form/SV_5nkEuIvT2Cn3rIF",
+  "RedirectTime":5
 }

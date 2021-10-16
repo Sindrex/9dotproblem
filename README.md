@@ -104,3 +104,9 @@ Here's one way to integrate with Qualtrics so both of these options are possible
   10. Click "Set a Value Now" for "id". Write "${e://Field/ResponseID}"
   11. Click "Save Flow".
   12. Publish and you are done! This survey will now use the ID gotten from the 9dotproblem system.
+
+
+## Supported URL params
+* id: string. The participant's id.
+* redirect: bool ("true" or "false"). Whether or not to redirect after finishing the test.
+* showt: bool ("true" or "false"). Whether or not to show the countdown timer.

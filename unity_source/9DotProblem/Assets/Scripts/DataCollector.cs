@@ -9,7 +9,8 @@ public class DataCollector : MonoBehaviour {
 
     public string playerID = "temp";
     public bool urlOK = false;
-    public bool redirect;
+    public bool doRedirect;
+    public bool showTimer;
 
     [SerializeField]
     public List<ProblemTry> tries;
@@ -35,7 +36,6 @@ public class DataCollector : MonoBehaviour {
         //URL stuff
         string url = GetURL();
         Debug.Log("URL gotten: " + url);
-
         string[] parameters = url.Split('?')[1].Split('&');
         /*
         Debug.Log("Params:");
@@ -44,30 +44,48 @@ public class DataCollector : MonoBehaviour {
             Debug.Log(s);
         }*/
 
-        if (parameters[0].Contains("id="))
+        Dictionary<string, string> ParamDict = new Dictionary<string, string>();
+        foreach(string s in parameters)
+        {
+            string[] keyvalue = s.Split('=');
+            ParamDict.Add(keyvalue[0], keyvalue[1]);
+        }
+
+        string id, redirect, showtimer;
+        if(ParamDict.TryGetValue("id", out id))
         {
             urlOK = true;
-            playerID = parameters[0].Split('=')[1];
+            playerID = id;
             Debug.Log("ID sat to: " + playerID);
-
-            if (parameters.Length > 1 && parameters[1].Contains("redirect="))
-            {
-                string redirectString = parameters[1].Split('=')[1];
-                if (redirectString.Equals("true"))
-                {
-                    redirect = true;
-                }
-                else
-                {
-                    redirect = false;
-                }
-            }
-            Debug.Log("Redirect: " + redirect);
         }
         else
         {
             urlOK = false;
             Debug.Log("URL not accepted");
+        }
+        if(ParamDict.TryGetValue("redirect", out redirect))
+        {
+            if (redirect.Equals("true"))
+            {
+                doRedirect = true;
+            }
+            else
+            {
+                doRedirect = false;
+            }
+            Debug.Log("Redirect: " + redirect);
+        }
+        if(ParamDict.TryGetValue("showt", out showtimer))
+        {
+            if (showtimer.Equals("true"))
+            {
+                showTimer = true;
+            }
+            else
+            {
+                showTimer = false;
+            }
+            Debug.Log("Show Timer: " + showTimer);
         }
     }
 
