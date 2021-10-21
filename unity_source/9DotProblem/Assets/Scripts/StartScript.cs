@@ -20,7 +20,7 @@ public class StartScript : MonoBehaviour {
         playButton.interactable = false;
         data = GameObject.Find("DataCollector").GetComponent<DataCollector>();
         titleText.text = "";
-        http.onConfigDownloaded.Add(() => titleText.text = http.config.Title);
+        http.addOnConfigDownloaded(() => titleText.text = http.config.Title);
     }
 
     //For testing

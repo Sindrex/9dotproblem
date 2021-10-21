@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour {
     public Button tryAgainButton;
 
     //set by config
+    public GameObject helpObject;
     public Text helpText;
     public int maxsec;
 
@@ -38,24 +39,18 @@ public class UIController : MonoBehaviour {
         //config
         helpText.text = GC.http.config.HelpText;
         maxsec = GC.http.config.TimeLimitSeconds;
-        timerWrapper.SetActive(false);
-        if (GC.http.config.ShowTimer || GC.data.showTimer)
-        {
-            print(GC.http.config.ShowTimer);
-            timerWrapper.SetActive(true);
-        }
+        timerWrapper.SetActive(GC.http.config.ShowTimer || GC.data.showTimer);
+        helpObject.SetActive(GC.http.config.ShowHelpText);
 
         if (GC.data.tries.Count <= 0)
         {
             lerper.lerpIntro(finishedLerp);
-            //lineMaker.done = true;
         }
     }
 
     public void finishedLerp()
     {
         print("Lerping done!");
-        //lineMaker.done = false;
     }
 
     // Update is called once per frame

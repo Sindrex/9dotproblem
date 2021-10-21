@@ -9,8 +9,14 @@ public class ProblemTry {
     public List<Vector2> positions; // 0-5 points in space
 
     [SerializeField]
+    public List<float> timers; //timing for each action
+
+    [SerializeField]
     public List<string> nodes; // 0-5 nodes in space, e.g. "A1"
 
     [SerializeField]
     public bool accepted;
+
+    [SerializeField]
+    public float totalTabbedOutTimer;
 }

@@ -20,6 +20,8 @@ public class LineMakerScript : MonoBehaviour {
     public GameObject pointPrefab;
     public List<LineDataPointController> points;
 
+    public float lastPointTime;
+
     // Use this for initialization
     void Start () {
         myLines = new List<GameObject>();
@@ -45,6 +47,12 @@ public class LineMakerScript : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) //make line!
             {
                 Debug.Log("Making line!");
+                if(points.Count > 0)
+                {
+                    points[points.Count - 1].timerAtNextDraw = GC.timer.fullTimer;
+                    print("timerAtNextDraw " + points[points.Count - 1].timerAtNextDraw);
+                }
+                
                 GameObject myLine = new GameObject("Line" + myLines.Count);
                 myLine.transform.parent = lineParent.transform;
                 myLine.AddComponent<LineRenderer>();
@@ -68,7 +76,10 @@ public class LineMakerScript : MonoBehaviour {
 
                     GameObject prefab = Instantiate(pointPrefab, lineParent.transform);
                     prefab.transform.position = startPos;
-                    points.Add(prefab.GetComponent<LineDataPointController>());
+                    var dataPoint = prefab.GetComponent<LineDataPointController>();
+                    dataPoint.timerAtCreation = GC.timer.fullTimer;
+                    print("timerAtCreation " + dataPoint.timerAtCreation);
+                    points.Add(dataPoint);
                 }
                 else if(myLines.Count < maxLines) //not first line
                 {
@@ -100,13 +111,19 @@ public class LineMakerScript : MonoBehaviour {
 
                 GameObject prefab = Instantiate(pointPrefab, lineParent.transform);
                 prefab.transform.position = currentPos;
-                points.Add(prefab.GetComponent<LineDataPointController>());
+                print(prefab.transform.position.ToString());
+                var dataPoint = prefab.GetComponent<LineDataPointController>();
+                dataPoint.timerAtCreation = GC.timer.fullTimer;
+                print("timerAtCreation " + dataPoint.timerAtCreation);
+                points.Add(dataPoint);
 
                 if (myLines.Count == maxLines)
                 {
                     done = true;
                     GC.checkDone();
                 }
+
+                lastPointTime = GC.timer.fullTimer;
             }
         }
 	}

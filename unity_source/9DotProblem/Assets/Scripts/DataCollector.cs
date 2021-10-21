@@ -48,6 +48,10 @@ public class DataCollector : MonoBehaviour {
         foreach(string s in parameters)
         {
             string[] keyvalue = s.Split('=');
+            if(keyvalue.Length != 2)
+            {
+                continue;
+            }
             ParamDict.Add(keyvalue[0], keyvalue[1]);
         }
 
@@ -89,7 +93,7 @@ public class DataCollector : MonoBehaviour {
         }
     }
 
-    public void add(List<LineDataPointController> points, bool accepted, HTTPController http)
+    public void add(List<LineDataPointController> points, bool accepted, HTTPController http, float totalTabbedOutTimer)
     {
         if (trySent)
         {
@@ -105,18 +109,23 @@ public class DataCollector : MonoBehaviour {
 
         List<Vector2> positions = new List<Vector2>();
         List<string> nodes = new List<string>();
+        List<float> timers = new List<float>();
         foreach (LineDataPointController point in points)
         {
             //print("Collecting: " + point.transform.position);
             positions.Add(point.transform.position);
             nodes.Add(point.nodeName);
+            timers.Add(point.timerAtCreation);
+            timers.Add(point.timerAtNextDraw);
         }
 
         ProblemTry newTry = new ProblemTry();
         tries.Add(newTry);
         newTry.positions = positions;
         newTry.nodes = nodes;
+        newTry.timers = timers;
         newTry.accepted = accepted;
+        newTry.totalTabbedOutTimer = totalTabbedOutTimer;
 
         //send right away
         int tryNr = (tries.IndexOf(newTry) + 1);

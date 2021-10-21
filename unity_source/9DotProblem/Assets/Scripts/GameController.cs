@@ -24,6 +24,10 @@ public class GameController : MonoBehaviour {
     [DllImport("__Internal")]
     private static extern void OpenURL(string url);
 
+    [DllImport("__Internal")]
+    private static extern bool CheckVisible();
+    private float totalTabbedOutTimer;
+
     private void Awake()
     {
         data = GameObject.Find("DataCollector").GetComponent<DataCollector>();
@@ -36,6 +40,14 @@ public class GameController : MonoBehaviour {
         winText.SetActive(false);
         tryAgainText.SetActive(false);
         data.trySent = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if(CheckVisible())
+        {
+            totalTabbedOutTimer += Time.deltaTime;
+        }
     }
 
     public void checkDone()
@@ -96,7 +108,7 @@ public class GameController : MonoBehaviour {
 
     public void addPoints()
     {
-        data.add(lineMaker.points, accepted, http);
+        data.add(lineMaker.points, accepted, http, totalTabbedOutTimer);
     }
 
     IEnumerator redirectWait(string url, int waitTime)

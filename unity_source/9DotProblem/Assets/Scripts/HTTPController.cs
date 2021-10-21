@@ -6,10 +6,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class HTTPController : MonoBehaviour {
-
+public class HTTPController : MonoBehaviour 
+{
+    private bool configDownloaded;
     public ConfigWrapper config;
-    public List<Action> onConfigDownloaded;
+    private List<Action> onConfigDownloaded;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class HTTPController : MonoBehaviour {
             Debug.Log("REDIRECT_URL: " + tempconfig.RedirectUrl);
 
             config = tempconfig;
+            configDownloaded = true;
 
             foreach(Action a in onConfigDownloaded)
             {
@@ -61,27 +63,52 @@ public class HTTPController : MonoBehaviour {
         }
     }
 
+    public void addOnConfigDownloaded(Action a)
+    {
+        if(!configDownloaded)
+        {
+            onConfigDownloaded.Add(a);
+        }
+        else
+        {
+            a();
+        }
+
+    }
+
     public void sendOne(string id, int trynr, ProblemTry pt)
     {
-        //All in one json package
-        string json = "{" + "\"created_at\": \"" + System.DateTime.Now + "\", " + "\"player_id\": \"" + id + "\", " + "\"try_nr\": \"" + trynr + "\"";
-        int index = 1;
-        foreach (Vector2 coord in pt.positions)
+        TryRawAndConverted fullTry = new TryRawAndConverted
         {
-            json += ", \"point" + index + "\": \"" + coord + "\"";
-            index++;
-        }
-        index = 1;
-        foreach (string nodeName in pt.nodes)
-        {
-            json += ", \"node" + index + "\": \"" + nodeName + "\"";
-            index++;
-        }
-        json += ", \"accepted\": \"" + pt.accepted + "\"";
-        json += "}";
-        print("json: " + json);
+            created_at = System.DateTime.Now,
+            player_id = id,
+            try_nr = trynr,
+            point1 = pt.positions.Count > 0 ? pt.positions[0].ToString() : null,
+            point2 = pt.positions.Count > 1 ? pt.positions[1].ToString() : null,
+            point3 = pt.positions.Count > 2 ? pt.positions[2].ToString() : null,
+            point4 = pt.positions.Count > 3 ? pt.positions[3].ToString() : null,
+            point5 = pt.positions.Count > 4 ? pt.positions[4].ToString() : null,
+            node1 = pt.nodes.Count > 0 ? pt.nodes[0] : null,
+            node2 = pt.nodes.Count > 1 ? pt.nodes[1] : null,
+            node3 = pt.nodes.Count > 2 ? pt.nodes[2] : null,
+            node4 = pt.nodes.Count > 3 ? pt.nodes[3] : null,
+            node5 = pt.nodes.Count > 4 ? pt.nodes[4] : null,
+            accepted = pt.accepted,
 
-        StartCoroutine(sendPOST(json));
+            timer1 = pt.timers.Count > 0 ? pt.timers[0] : -1,
+            timer2 = pt.timers.Count > 1 ? pt.timers[1] : -1,
+            timer3 = pt.timers.Count > 2 ? pt.timers[2] : -1,
+            timer4 = pt.timers.Count > 3 ? pt.timers[3] : -1,
+            timer5 = pt.timers.Count > 4 ? pt.timers[4] : -1,
+            timer6 = pt.timers.Count > 5 ? pt.timers[5] : -1,
+            timer7 = pt.timers.Count > 6 ? pt.timers[6] : -1,
+            timer8 = pt.timers.Count > 7 ? pt.timers[7] : -1,
+
+            hasTabbedOut = pt.totalTabbedOutTimer > 0,
+            totalTabbedOutTime = pt.totalTabbedOutTimer
+        };
+
+        StartCoroutine(sendPOST(JsonUtility.ToJson(fullTry)));
     }
 
     IEnumerator sendPOST(string json)

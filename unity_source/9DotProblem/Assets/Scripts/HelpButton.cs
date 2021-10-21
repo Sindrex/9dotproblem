@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HelpButton : MonoBehaviour {
-
+public class HelpButton : MonoBehaviour 
+{
     public GameObject wrapper;
 
 	// Use this for initialization
@@ -12,7 +12,7 @@ public class HelpButton : MonoBehaviour {
         wrapper.SetActive(false);
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
         wrapper.SetActive(true);
     }

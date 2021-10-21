@@ -14,5 +14,14 @@ var QueryHandler = {
       console.log('Opening link: ' + url);
       window.open(url,'_blank');
     }
+    CheckVisible: function(){
+      if (document.visibilityState === 'visible') {
+        console.log('Plugin: Tab is visible');
+        return true;
+      } else {
+        console.log('Plugin: Tab is NOT visible');
+        return false;
+      }
+    }
 };
 mergeInto(LibraryManager.library, QueryHandler);

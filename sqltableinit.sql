@@ -12,6 +12,16 @@ CREATE TABLE 9dotproblemRaw (
 	point3 VARCHAR(32),
 	point4 VARCHAR(32),
 	point5 VARCHAR(32),
+	timer1 FLOAT,
+	timer2 FLOAT,
+	timer3 FLOAT,
+	timer4 FLOAT,
+	timer5 FLOAT,
+	timer6 FLOAT,
+	timer7 FLOAT,
+	timer8 FLOAT,
+	hasTabbedOut BIT,
+	totalTabbedOutTime FLOAT,
 	PRIMARY KEY (sequence_nr)
 );
 

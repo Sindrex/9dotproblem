@@ -10,6 +10,10 @@ public class LineDataPointController : MonoBehaviour {
     public string dataGridTag;
     public string dotTag;
 
+    //timing
+    public float timerAtCreation;
+    public float timerAtNextDraw;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collided)
