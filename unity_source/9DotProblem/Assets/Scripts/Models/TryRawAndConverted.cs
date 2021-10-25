@@ -4,34 +4,33 @@ using UnityEngine;
 [Serializable]
 public class TryRawAndConverted
 {
-    public DateTime created_at { get; set; }
-    public string player_id { get; set; }
-    public int try_nr { get; set; }
-    public string point1 { get; set; }
-    public string point2 { get; set; }
-    public string point3 { get; set; }
-    public string point4 { get; set; }
-    public string point5 { get; set; }
+    public string created_at;
+    public string player_id;
+    public int try_nr;
+    public string point1;
+    public string point2;
+    public string point3;
+    public string point4;
+    public string point5;
 
     //timers
-    public float timer1 { get; set; }
-    public float timer2 { get; set; }
-    public float timer3 { get; set; }
-    public float timer4 { get; set; }
-    public float timer5 { get; set; }
-    public float timer6 { get; set; }
-    public float timer7 { get; set; }
-    public float timer8 { get; set; }
+    public float timer1;
+    public float timer2;
+    public float timer3;
+    public float timer4;
+    public float timer5;
+    public float timer6;
+    public float timer7;
 
     //tabbed out
-    public bool hasTabbedOut { get; set; }
-    public float totalTabbedOutTime { get; set; }
+    public bool hasTabbedOut;
+    public float totalTabbedOutTime;
 
     //converted
-    public string node1 { get; set; }
-    public string node2 { get; set; }
-    public string node3 { get; set; }
-    public string node4 { get; set; }
-    public string node5 { get; set; }
-    public bool accepted { get; set; }
+    public string node1;
+    public string node2;
+    public string node3;
+    public string node4;
+    public string node5;
+    public bool accepted;
 }

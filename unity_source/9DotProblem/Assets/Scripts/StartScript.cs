@@ -46,13 +46,13 @@ public class StartScript : MonoBehaviour {
 
     public void play()
     {
-        Debug.Log("Starting main, lerping first");
+        Debug.Log("Starting training, lerping first");
         //data.playerID = IDInput.text; //Testing
-        lerper.lerpOutro(loadMain);
+        lerper.lerpOutro(loadNext);
     }
 
-    public void loadMain()
+    public void loadNext()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Training");
     }
 }

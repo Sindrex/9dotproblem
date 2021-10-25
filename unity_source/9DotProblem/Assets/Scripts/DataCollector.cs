@@ -20,6 +20,10 @@ public class DataCollector : MonoBehaviour {
 
     public bool trySent = false;
 
+    //Lerping
+    public bool trainingLerpDone;
+    public bool mainLerpDone;
+
     private void Start()
     {
         //Dontdestroyonload
@@ -110,13 +114,15 @@ public class DataCollector : MonoBehaviour {
         List<Vector2> positions = new List<Vector2>();
         List<string> nodes = new List<string>();
         List<float> timers = new List<float>();
+        var index = 0;
         foreach (LineDataPointController point in points)
         {
             //print("Collecting: " + point.transform.position);
             positions.Add(point.transform.position);
             nodes.Add(point.nodeName);
             timers.Add(point.timerAtCreation);
-            timers.Add(point.timerAtNextDraw);
+            if(index > 0) timers.Add(point.timerAtNextDraw);
+            index++;
         }
 
         ProblemTry newTry = new ProblemTry();

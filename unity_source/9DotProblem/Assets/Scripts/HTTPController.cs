@@ -10,7 +10,7 @@ public class HTTPController : MonoBehaviour
 {
     private bool configDownloaded;
     public ConfigWrapper config;
-    private List<Action> onConfigDownloaded;
+    private List<Action> onConfigDownloaded = new List<Action>();
 
     private void Awake()
     {
@@ -47,11 +47,6 @@ public class HTTPController : MonoBehaviour
             Debug.Log("Received: \n" + uwr.downloadHandler.text);
 
             var tempconfig = ConfigWrapper.CreateFromJSON(uwr.downloadHandler.text);
-            Debug.Log("URL: " + tempconfig.Url);
-            Debug.Log("MAX_SEC: " + tempconfig.TimeLimitSeconds);
-            Debug.Log("SHOW_TIMER: " + tempconfig.ShowTimer);
-            Debug.Log("HELP_TEXT: " + tempconfig.HelpText);
-            Debug.Log("REDIRECT_URL: " + tempconfig.RedirectUrl);
 
             config = tempconfig;
             configDownloaded = true;
@@ -80,7 +75,7 @@ public class HTTPController : MonoBehaviour
     {
         TryRawAndConverted fullTry = new TryRawAndConverted
         {
-            created_at = System.DateTime.Now,
+            created_at = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
             player_id = id,
             try_nr = trynr,
             point1 = pt.positions.Count > 0 ? pt.positions[0].ToString() : null,
@@ -102,13 +97,14 @@ public class HTTPController : MonoBehaviour
             timer5 = pt.timers.Count > 4 ? pt.timers[4] : -1,
             timer6 = pt.timers.Count > 5 ? pt.timers[5] : -1,
             timer7 = pt.timers.Count > 6 ? pt.timers[6] : -1,
-            timer8 = pt.timers.Count > 7 ? pt.timers[7] : -1,
 
             hasTabbedOut = pt.totalTabbedOutTimer > 0,
             totalTabbedOutTime = pt.totalTabbedOutTimer
         };
 
-        StartCoroutine(sendPOST(JsonUtility.ToJson(fullTry)));
+        var json = JsonUtility.ToJson(fullTry);
+        print(json);
+        StartCoroutine(sendPOST(json));
     }
 
     IEnumerator sendPOST(string json)

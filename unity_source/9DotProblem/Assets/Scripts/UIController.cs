@@ -28,21 +28,23 @@ public class UIController : MonoBehaviour {
     public GameObject timeUpText;
 
     public CamLerper lerper;
+    public CamLerper lerperTraining;
     public Vector3 endTarget;
 
     private void Start()
     {
-        quitText.SetActive(false);
-        tryCount.text = "" + GC.data.tries.Count;
-        timer = GC.timer;
-
-        //config
-        helpText.text = GC.http.config.HelpText;
-        maxsec = GC.http.config.TimeLimitSeconds;
-        timerWrapper.SetActive(GC.http.config.ShowTimer || GC.data.showTimer);
-        helpObject.SetActive(GC.http.config.ShowHelpText);
-
-        if (GC.data.tries.Count <= 0)
+        if(!GC.isTraining)
+        {
+            quitText.SetActive(false);
+            tryCount.text = "" + GC.data.tries.Count;
+            timer = GC.timer;
+            //config
+            helpText.text = GC.http.config.HelpText;
+            maxsec = GC.http.config.TimeLimitSeconds;
+            timerWrapper.SetActive(GC.http.config.ShowTimer || GC.data.showTimer);
+            helpObject.SetActive(GC.http.config.ShowHelpText);
+        }
+        if ((!GC.isTraining && !GC.data.mainLerpDone) || (GC.isTraining && !GC.data.trainingLerpDone))
         {
             lerper.lerpIntro(finishedLerp);
         }
@@ -51,36 +53,61 @@ public class UIController : MonoBehaviour {
     public void finishedLerp()
     {
         print("Lerping done!");
+        if(!GC.isTraining) GC.data.mainLerpDone = true;
+        if(GC.isTraining) GC.data.trainingLerpDone = true;
     }
 
     // Update is called once per frame
     private void Update () {
         lineCount.text = "" + (lineMaker.maxLines - lineMaker.myLines.Count);
 
-        timerFull.text = "" + FormatTime(maxsec - timer.fullTimer);
-        if(timer.fullTimer >= maxsec && maxsec > 0 && timer.takeTime) //check if maxtime is surpassed and maxtime is gotten (not 0).
+        if(!GC.isTraining)
         {
-            Debug.Log("Time's up Sunny!");
-            setNonInteractableButtons();
-            lineMaker.done = true;
-            timer.takeTime = false;
-            timeUpText.SetActive(true);
-            GC.addPoints();
-            GC.redirect();
+            timerFull.text = "" + FormatTime(maxsec - timer.fullTimer);
+            if(timer.fullTimer >= maxsec && maxsec > 0 && timer.takeTime) //check if maxtime is surpassed and maxtime is gotten (not 0).
+            {
+                Debug.Log("Time's up Sunny!");
+                setNonInteractableButtons();
+                lineMaker.done = true;
+                timer.takeTime = false;
+                timeUpText.SetActive(true);
+                GC.addPoints();
+                GC.redirect();
+            }
         }
 	}
 
     public void tryAgain()
     {
-        //GC.data.add(lineMaker.myLines, GC.http);
-        GC.addPoints(); //add data and send it!
-        timer.curTimer = 0;
+        if(!GC.isTraining)
+        {
+            GC.addPoints(); //add data and send it!
+            timer.curTimer = 0;
+        }
         reloadScene();
+    }
+
+    //training
+    public void continueToMain()
+    {
+        lerperTraining.lerpOutro(loadNextMain);
+    }
+
+    private void loadNextMain()
+    {
+        SceneManager.LoadScene("Main");
     }
 
     private void reloadScene()
     {
-        SceneManager.LoadScene("Main");
+        if(!GC.isTraining)
+        {
+            SceneManager.LoadScene("Main");
+        }
+        else
+        {
+            SceneManager.LoadScene("Training");
+        }
     }
 
     public void setNonInteractableButtons()

@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main.unity
     guid: f7a9619520929644e86c9ece69b46382
+  - enabled: 1
+    path: Assets/Training.unity
+    guid: 3842a2c21798ef64eb1527b64b776eea

@@ -1,12 +1,14 @@
-DROP TABLE IF EXISTS 9dotproblem;
-DROP TABLE IF EXISTS 9dotproblemRaw;
-DROP TABLE IF EXISTS 9dotproblemConv;
+DROP TABLE IF EXISTS 9dotproblem.9dotproblemRaw;
+DROP TABLE IF EXISTS 9dotproblem.9dotproblemConv;
+DROP SCHEMA IF EXISTS 9dotproblem;
 
-CREATE TABLE 9dotproblemRaw (
-	sequence_nr INT(11) NOT NULL AUTO_INCREMENT,
+CREATE SCHEMA 9dotproblem;
+
+CREATE TABLE 9dotproblem.9dotproblemRaw (
+	sequence_nr INT NOT NULL AUTO_INCREMENT,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	player_id VARCHAR(11) NOT NULL,
-	try_nr INT(11) NOT NULL,
+	try_nr INT NOT NULL,
 	point1 VARCHAR(32),
 	point2 VARCHAR(32),
 	point3 VARCHAR(32),
@@ -19,17 +21,16 @@ CREATE TABLE 9dotproblemRaw (
 	timer5 FLOAT,
 	timer6 FLOAT,
 	timer7 FLOAT,
-	timer8 FLOAT,
 	hasTabbedOut BIT,
 	totalTabbedOutTime FLOAT,
 	PRIMARY KEY (sequence_nr)
 );
 
-CREATE TABLE 9dotproblemConv (
-	sequence_nr INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE 9dotproblem.9dotproblemConv (
+	sequence_nr INT NOT NULL AUTO_INCREMENT,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	player_id VARCHAR(11) NOT NULL,
-	try_nr INT(11) NOT NULL,
+	try_nr INT NOT NULL,
 	node1 VARCHAR(32),
 	node2 VARCHAR(32),
 	node3 VARCHAR(32),

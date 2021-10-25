@@ -11,8 +11,8 @@ public class LineDataPointController : MonoBehaviour {
     public string dotTag;
 
     //timing
-    public float timerAtCreation;
-    public float timerAtNextDraw;
+    public float timerAtCreation = -1;
+    public float timerAtNextDraw = -1;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

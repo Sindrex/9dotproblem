@@ -28,25 +28,35 @@ public class GameController : MonoBehaviour {
     private static extern bool CheckVisible();
     private float totalTabbedOutTimer;
 
+    //training
+    public bool isTraining = false;
+
     private void Awake()
     {
         data = GameObject.Find("DataCollector").GetComponent<DataCollector>();
-        http = GameObject.Find("Http").GetComponent<HTTPController>();
-        timer = GameObject.Find("Timer").GetComponent<TimerScript>();
+        if(!isTraining)
+        {
+            http = GameObject.Find("Http").GetComponent<HTTPController>();
+            timer = GameObject.Find("Timer").GetComponent<TimerScript>();
+        }
     }
 
     private void Start()
     {
-        winText.SetActive(false);
-        tryAgainText.SetActive(false);
-        data.trySent = false;
+        if(!isTraining)
+        {
+            winText.SetActive(false);
+            tryAgainText.SetActive(false);
+            data.trySent = false;
+        }
     }
 
     private void FixedUpdate()
     {
-        if(CheckVisible())
+        if(!isTraining && !CheckVisible())
         {
             totalTabbedOutTimer += Time.deltaTime;
+            print("Addint time to totalTabbedOutTimer!");
         }
     }
 
@@ -57,6 +67,11 @@ public class GameController : MonoBehaviour {
 
     private IEnumerator checkDoneIEnum()
     {
+        if(isTraining)
+        {
+            yield return new WaitForSeconds(0);
+            yield break;
+        }
         yield return new WaitForSeconds(waitWhenCheckDone);
 
         int accepted = 0;

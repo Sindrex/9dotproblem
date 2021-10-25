@@ -13,7 +13,7 @@ var QueryHandler = {
       url = Pointer_stringify(url);
       console.log('Opening link: ' + url);
       window.open(url,'_blank');
-    }
+    },
     CheckVisible: function(){
       if (document.visibilityState === 'visible') {
         console.log('Plugin: Tab is visible');

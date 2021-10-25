@@ -49,7 +49,7 @@ public class LineMakerScript : MonoBehaviour {
                 Debug.Log("Making line!");
                 if(points.Count > 0)
                 {
-                    points[points.Count - 1].timerAtNextDraw = GC.timer.fullTimer;
+                    if(!GC.isTraining) points[points.Count - 1].timerAtNextDraw = GC.timer.fullTimer;
                     print("timerAtNextDraw " + points[points.Count - 1].timerAtNextDraw);
                 }
                 
@@ -77,7 +77,7 @@ public class LineMakerScript : MonoBehaviour {
                     GameObject prefab = Instantiate(pointPrefab, lineParent.transform);
                     prefab.transform.position = startPos;
                     var dataPoint = prefab.GetComponent<LineDataPointController>();
-                    dataPoint.timerAtCreation = GC.timer.fullTimer;
+                    if(!GC.isTraining) dataPoint.timerAtCreation = GC.timer.fullTimer;
                     print("timerAtCreation " + dataPoint.timerAtCreation);
                     points.Add(dataPoint);
                 }
@@ -113,7 +113,7 @@ public class LineMakerScript : MonoBehaviour {
                 prefab.transform.position = currentPos;
                 print(prefab.transform.position.ToString());
                 var dataPoint = prefab.GetComponent<LineDataPointController>();
-                dataPoint.timerAtCreation = GC.timer.fullTimer;
+                if(!GC.isTraining) dataPoint.timerAtCreation = GC.timer.fullTimer;
                 print("timerAtCreation " + dataPoint.timerAtCreation);
                 points.Add(dataPoint);
 
@@ -123,7 +123,7 @@ public class LineMakerScript : MonoBehaviour {
                     GC.checkDone();
                 }
 
-                lastPointTime = GC.timer.fullTimer;
+                if(!GC.isTraining) lastPointTime = GC.timer.fullTimer;
             }
         }
 	}

@@ -326,6 +326,8 @@ MonoBehaviour:
   IDInput: {fileID: 1372482102}
   data: {fileID: 0}
   lerper: {fileID: 717639703}
+  titleText: {fileID: 493130480}
+  http: {fileID: 945712351}
 --- !u!4 &517561761
 Transform:
   m_ObjectHideFlags: 0
@@ -552,7 +554,7 @@ RectTransform:
   - {fileID: 493130479}
   - {fileID: 1712662227}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -647,9 +649,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 
   urlOK: 0
-  redirect: 0
+  doRedirect: 0
+  showTimer: 0
   tries: []
   trySent: 0
+  trainingLerpDone: 0
+  mainLerpDone: 0
 --- !u!1 &945712350
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,12 +683,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config:
-    URL: 
-    MAX_SEC: 0
-    SHOW_TIMER: 0
-    HELP_TEXT: 
-    REDIRECT_URL: 
-    REDIRECT_TIME: 0
+    Url: 
+    TimeLimitSeconds: 0
+    ShowTimer: 0
+    HelpText: 
+    ShowHelpText: 0
+    Title: 
+    RedirectUrl: 
+    RedirectTime: 0
 --- !u!4 &945712352
 Transform:
   m_ObjectHideFlags: 0
@@ -695,7 +702,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235617377
 GameObject:
