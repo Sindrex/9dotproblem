@@ -97,6 +97,7 @@ public class HTTPController : MonoBehaviour
             timer5 = pt.timers.Count > 4 ? pt.timers[4] : -1,
             timer6 = pt.timers.Count > 5 ? pt.timers[5] : -1,
             timer7 = pt.timers.Count > 6 ? pt.timers[6] : -1,
+            timer8 = pt.timers.Count > 7 ? pt.timers[7] : -1,
 
             hasTabbedOut = pt.totalTabbedOutTimer > 0,
             totalTabbedOutTime = pt.totalTabbedOutTimer

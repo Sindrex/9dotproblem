@@ -44,6 +44,9 @@ There is a single JSON formatted file called "config.json". It has the following
 ### Running server
 Run `npm start` from the top folder.
 
+### Open and try
+`http://localhost:3000/?id=sindre&redirect=true`
+
 ## Dependencies
 Programs used to run:
  * Git bash or equivalent
@@ -68,6 +71,15 @@ The database consists of 2 tables:
    * 7: (6.9, 10.6)
    * 8: (8.9, 10.6)
    * 9: (10.9, 10.6)
+ In addition 8 timers are stored. These are the time between different draw actions taken by the user.
+   * timer1: When the first point is created (and the user starts drawing first line).
+   * timer2: When the second point is created (and the user stops drawing first line).
+   * timer3: When the user starts drawing second line.
+   * timer4: When the third point is created (and the user stops drawing the second line).
+   * timer5: When the user starts drawing the third line.
+   * timer6: When the fourth point is created (and the user stops drawing the third line).
+   * timer7: When the user starts drawing the fourth line.
+   * timer8: When the fifth point is created (and the user stops drawing the fourth and final line)
  * Converted data: Stored in the 9dotproblemConv table. Contains the raw data converted to what area they fit in (each area is called a 'node'). See data diagram for all the nodes. Also contains an 'accepted' field to say if the user managed to draw through all nine dots.
 
 ## Integration with Qualtrics

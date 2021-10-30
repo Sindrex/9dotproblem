@@ -21,6 +21,7 @@ CREATE TABLE 9dotproblem.9dotproblemRaw (
 	timer5 FLOAT,
 	timer6 FLOAT,
 	timer7 FLOAT,
+	timer8 FLOAT,
 	hasTabbedOut BIT,
 	totalTabbedOutTime FLOAT,
 	PRIMARY KEY (sequence_nr)
