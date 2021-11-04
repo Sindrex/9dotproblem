@@ -22,6 +22,7 @@ public class TryRawAndConverted
     public float timer6;
     public float timer7;
     public float timer8;
+    public float totalTime;
 
     //tabbed out
     public bool hasTabbedOut;

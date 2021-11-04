@@ -44,12 +44,14 @@ public class HTTPController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Received: \n" + uwr.downloadHandler.text);
+            Debug.Log("Config received: \n" + uwr.downloadHandler.text);
 
             var tempconfig = ConfigWrapper.CreateFromJSON(uwr.downloadHandler.text);
 
             config = tempconfig;
             configDownloaded = true;
+
+            Debug.Log("Config training screen text parsed: \n" + config.TrainingScreenText);
 
             foreach(Action a in onConfigDownloaded)
             {
@@ -73,6 +75,12 @@ public class HTTPController : MonoBehaviour
 
     public void sendOne(string id, int trynr, ProblemTry pt)
     {
+        float totalTime = 0;
+        foreach(float time in pt.timers)
+        {
+            totalTime += time;
+        }
+
         TryRawAndConverted fullTry = new TryRawAndConverted
         {
             created_at = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
@@ -98,6 +106,7 @@ public class HTTPController : MonoBehaviour
             timer6 = pt.timers.Count > 5 ? pt.timers[5] : -1,
             timer7 = pt.timers.Count > 6 ? pt.timers[6] : -1,
             timer8 = pt.timers.Count > 7 ? pt.timers[7] : -1,
+            totalTime = totalTime,
 
             hasTabbedOut = pt.totalTabbedOutTimer > 0,
             totalTabbedOutTime = pt.totalTabbedOutTimer

@@ -59,12 +59,12 @@ public class DataCollector : MonoBehaviour {
             ParamDict.Add(keyvalue[0], keyvalue[1]);
         }
 
-        string id, redirect, showtimer;
+        string id, redirect, showt;
         if(ParamDict.TryGetValue("id", out id))
         {
             urlOK = true;
             playerID = id;
-            Debug.Log("ID sat to: " + playerID);
+            Debug.Log("URL OK. ID sat to: " + playerID);
         }
         else
         {
@@ -83,9 +83,9 @@ public class DataCollector : MonoBehaviour {
             }
             Debug.Log("Redirect: " + redirect);
         }
-        if(ParamDict.TryGetValue("showt", out showtimer))
+        if(ParamDict.TryGetValue("showt", out showt))
         {
-            if (showtimer.Equals("true"))
+            if (showt.Equals("true"))
             {
                 showTimer = true;
             }
@@ -121,9 +121,15 @@ public class DataCollector : MonoBehaviour {
             positions.Add(point.transform.position);
             nodes.Add(point.nodeName);
             timers.Add(point.timerAtCreation);
-            if(index > 0) timers.Add(point.timerAtNextDraw);
+            if(index > 0)
+            {
+                var previous = timers[index - 1];
+                timers.Add(point.timerAtNextDraw - previous);
+            }
             index++;
         }
+
+        print("timers length: " + timers.Count);
 
         ProblemTry newTry = new ProblemTry();
         tries.Add(newTry);

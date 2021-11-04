@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 976081607}
   - component: {fileID: 976081606}
   m_Layer: 5
-  m_Name: LineCountText
+  m_Name: TrainingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2515,6 +2515,9 @@ MonoBehaviour:
   lerper: {fileID: 2138338472}
   lerperTraining: {fileID: 141827547}
   endTarget: {x: 0, y: 0, z: 0}
+  lineAmountText: {fileID: 0}
+  triesAmountText: {fileID: 0}
+  TrainingScreenText: {fileID: 976081606}
 --- !u!114 &2025806207
 MonoBehaviour:
   m_ObjectHideFlags: 0

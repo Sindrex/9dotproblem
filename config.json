@@ -5,10 +5,14 @@
   "DatabaseDB":"9dotproblem",
   "Url":"http://localhost:3000",
   "TimeLimitSeconds":60,
-  "ShowTimer":true,
+  "ShowTimer":false,
   "HelpText":"Draw four consecutive lines through all nine circles.",
   "ShowHelpText":true,
   "Title":"One-Stroke Puzzle",
   "RedirectUrl":"https://bino.qualtrics.com/jfe/form/SV_5nkEuIvT2Cn3rIF",
-  "RedirectTime":5
+  "RedirectTime":5,
+  "ShowLineAmount":true,
+  "ShowTriesAmount":true,
+  "ShowTrainingScreen":true,
+  "TrainingScreenText":"This task requires you to connect several circles using lines.\n\nYou can use drag-and-drop to draw the lines.\n\nTry to connect all the figures below by drawing some lines!"
 }

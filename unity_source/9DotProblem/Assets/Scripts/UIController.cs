@@ -31,6 +31,10 @@ public class UIController : MonoBehaviour {
     public CamLerper lerperTraining;
     public Vector3 endTarget;
 
+    public GameObject lineAmountText;
+    public GameObject triesAmountText;
+    public Text TrainingScreenText;
+
     private void Start()
     {
         if(!GC.isTraining)
@@ -43,10 +47,19 @@ public class UIController : MonoBehaviour {
             maxsec = GC.http.config.TimeLimitSeconds;
             timerWrapper.SetActive(GC.http.config.ShowTimer || GC.data.showTimer);
             helpObject.SetActive(GC.http.config.ShowHelpText);
+
+            lineAmountText.SetActive(GC.http.config.ShowLineAmount);
+            triesAmountText.SetActive(GC.http.config.ShowTriesAmount);
         }
         if ((!GC.isTraining && !GC.data.mainLerpDone) || (GC.isTraining && !GC.data.trainingLerpDone))
         {
             lerper.lerpIntro(finishedLerp);
+        }
+        if(GC.isTraining)
+        {
+            TrainingScreenText.text = GC.http.config.TrainingScreenText;
+            Debug.Log("Setting GC.http.config.TrainingScreenText: \n" + GC.http.config.TrainingScreenText);
+            Debug.Log("Setting TrainingScreenText.text: \n" + TrainingScreenText.text);
         }
     }
 

@@ -11,7 +11,11 @@ public class ConfigWrapper
     public string Title;
     public string RedirectUrl;
     public int RedirectTime;
-
+    public bool ShowLineAmount;
+    public bool ShowTriesAmount;
+    public bool ShowTrainingScreen;
+    public string TrainingScreenText;
+    
     public static ConfigWrapper CreateFromJSON(string jsonString)
     {
         return JsonUtility.FromJson<ConfigWrapper>(jsonString);

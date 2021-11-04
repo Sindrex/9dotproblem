@@ -57,9 +57,31 @@ app.get("/game/StreamingAssets", (req, res) => {
       "ShowHelpText":config.ShowHelpText,
       "Title":config.Title,
       "RedirectUrl":config.RedirectUrl,
-      "RedirectTime":config.RedirectTime
+      "RedirectTime":config.RedirectTime,
+      "ShowLineAmount":config.ShowLineAmount,
+      "ShowTriesAmount":config.ShowTriesAmount,
+      "ShowTrainingScreen":config.ShowTrainingScreen,
+      "TrainingScreenText":config.TrainingScreenText
   });
   console.log("Sent URL: " + config.Url + "/api/9dotproblem");
+});
+
+app.get("/api/conv", (req, res) => {
+  console.log("/conv got GET request from client");
+  res.status(200);
+  new DaoWrapper(pool).getAllConv((status, data) => {
+    res.status(status);
+    res.json(data);
+  });
+});
+
+app.get("/api/raw", (req, res) => {
+  console.log("/raw got GET request from client");
+  res.status(200);
+  new DaoWrapper(pool).getAllRaw((status, data) => {
+    res.status(status);
+    res.json(data);
+  });
 });
 
 const PORT = process.env.PORT || 3000;

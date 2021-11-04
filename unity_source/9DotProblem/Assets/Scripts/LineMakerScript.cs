@@ -49,7 +49,10 @@ public class LineMakerScript : MonoBehaviour {
                 Debug.Log("Making line!");
                 if(points.Count > 0)
                 {
-                    if(!GC.isTraining) points[points.Count - 1].timerAtNextDraw = GC.timer.fullTimer;
+                    if(!GC.isTraining)
+                    {
+                        points[points.Count - 1].timerAtNextDraw = GC.timer.fullTimer;
+                    } 
                     print("timerAtNextDraw " + points[points.Count - 1].timerAtNextDraw);
                 }
                 

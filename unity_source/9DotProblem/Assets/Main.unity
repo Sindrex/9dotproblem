@@ -5789,6 +5789,9 @@ MonoBehaviour:
   lerper: {fileID: 1196635684}
   lerperTraining: {fileID: 0}
   endTarget: {x: 0, y: 0, z: 0}
+  lineAmountText: {fileID: 1103665010}
+  triesAmountText: {fileID: 130847762}
+  TrainingScreenText: {fileID: 0}
 --- !u!114 &2025806207
 MonoBehaviour:
   m_ObjectHideFlags: 0
