@@ -97,7 +97,7 @@ public class DataCollector : MonoBehaviour {
         }
     }
 
-    public void add(List<LineDataPointController> points, bool accepted, HTTPController http, float totalTabbedOutTimer)
+    public void add(List<LineDataPointController> points, bool accepted, HTTPController http, int tabbedOutAmount)
     {
         if (trySent)
         {
@@ -137,7 +137,7 @@ public class DataCollector : MonoBehaviour {
         newTry.nodes = nodes;
         newTry.timers = timers;
         newTry.accepted = accepted;
-        newTry.totalTabbedOutTimer = totalTabbedOutTimer;
+        newTry.tabbedOutAmount = tabbedOutAmount;
 
         //send right away
         int tryNr = (tries.IndexOf(newTry) + 1);

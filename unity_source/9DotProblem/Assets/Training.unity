@@ -113,6 +113,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &54957047
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 11.834995
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.3704596
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -9.910156
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944619647365160, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7458c15edb8dc1e408889cbea6648b8e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!114 &141827547 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114166429214248250, guid: f567c115a54d42948ad2ce7b0a4373ea,
@@ -1030,8 +1072,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 87.3}
-  m_SizeDelta: {x: 400, y: 134.36}
+  m_AnchoredPosition: {x: 0, y: 77.233}
+  m_SizeDelta: {x: 400, y: 154.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &976081606
 MonoBehaviour:
@@ -1065,13 +1107,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This task requires you to connect several circles using lines.
-
-
-    You can use drag-and-drop to draw the lines.
-
-
-    Try to connect all the figures below by drawing some lines!'
+  m_Text: Lorem ipsum
 --- !u!222 &976081607
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2305,7 +2341,7 @@ Canvas:
   m_GameObject: {fileID: 1914618215}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 915241342}
   m_PlaneDistance: 9
   m_PixelPerfect: 0
@@ -2324,8 +2360,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1914618215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 0.022224812, y: 0.022224812, z: 0.022224812}
   m_Children:
   - {fileID: 1103665011}
   - {fileID: 464297228}
@@ -2337,9 +2373,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 8.9, y: 8.6}
+  m_SizeDelta: {x: 799.9068, y: 449.94754}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2023718006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,6 +2587,7 @@ MonoBehaviour:
   data: {fileID: 0}
   timer: {fileID: 0}
   isTraining: 1
+  isTest: 0
 --- !u!1001 &2138338471
 Prefab:
   m_ObjectHideFlags: 0

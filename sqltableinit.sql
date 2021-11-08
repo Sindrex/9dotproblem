@@ -23,8 +23,8 @@ CREATE TABLE 9dotproblem.9dotproblemRaw (
 	timer7 FLOAT,
 	timer8 FLOAT,
 	totalTime FLOAT,
-	hasTabbedOut BIT,
-	totalTabbedOutTime FLOAT,
+	hasTabbedOut INT,
+	tabbedOutAmount INT,
 	PRIMARY KEY (sequence_nr)
 );
 
@@ -38,6 +38,6 @@ CREATE TABLE 9dotproblem.9dotproblemConv (
 	node3 VARCHAR(32),
 	node4 VARCHAR(32),
 	node5 VARCHAR(32),
-	accepted BIT,
+	accepted INT,
 	PRIMARY KEY (sequence_nr)
 );

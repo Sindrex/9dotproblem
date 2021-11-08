@@ -32,11 +32,6 @@ public class CamLerper : MonoBehaviour {
             {
                 doLerp = false;
                 lerpFactor = 0;
-                if (setRenderModeAtTarget)
-                {
-                    myCanvas.renderMode = RenderMode.ScreenSpaceCamera;
-                    myCanvas.worldCamera = cam;
-                }
                 methodAtFinish();
             }
         }

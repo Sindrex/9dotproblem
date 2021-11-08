@@ -26,7 +26,8 @@ public class GameController : MonoBehaviour {
 
     [DllImport("__Internal")]
     private static extern bool CheckVisible();
-    private float totalTabbedOutTimer;
+    private int tabbedOutAmount;
+    private bool hasTabbedOutLock = false;
 
     //training
     public bool isTraining = false;
@@ -34,9 +35,9 @@ public class GameController : MonoBehaviour {
     private void Awake()
     {
         data = GameObject.Find("DataCollector").GetComponent<DataCollector>();
+        http = GameObject.Find("Http").GetComponent<HTTPController>();
         if(!isTraining)
         {
-            http = GameObject.Find("Http").GetComponent<HTTPController>();
             timer = GameObject.Find("Timer").GetComponent<TimerScript>();
         }
     }
@@ -53,10 +54,17 @@ public class GameController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if(!isTraining && !CheckVisible())
+        //Debug.Log("hasTabbedOutLock=" + hasTabbedOutLock);
+        if(!isTraining && !CheckVisible() && !hasTabbedOutLock)
         {
-            totalTabbedOutTimer += Time.deltaTime;
-            print("Addint time to totalTabbedOutTimer!");
+            hasTabbedOutLock = true;
+            tabbedOutAmount += 1;
+            Debug.Log("Tabbed out! tabbedOutAmount=" + tabbedOutAmount);
+        }
+        else if(!isTraining && CheckVisible() && hasTabbedOutLock)
+        {
+            hasTabbedOutLock = false;
+            Debug.Log("Tabbed in! Releasing lock");
         }
     }
 
@@ -123,7 +131,7 @@ public class GameController : MonoBehaviour {
 
     public void addPoints()
     {
-        data.add(lineMaker.points, accepted, http, totalTabbedOutTimer);
+        data.add(lineMaker.points, accepted, http, tabbedOutAmount);
     }
 
     IEnumerator redirectWait(string url, int waitTime)

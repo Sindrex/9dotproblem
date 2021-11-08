@@ -18,5 +18,5 @@ public class ProblemTry {
     public bool accepted;
 
     [SerializeField]
-    public float totalTabbedOutTimer;
+    public int tabbedOutAmount;
 }

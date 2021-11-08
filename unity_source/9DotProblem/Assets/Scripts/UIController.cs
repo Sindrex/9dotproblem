@@ -58,8 +58,8 @@ public class UIController : MonoBehaviour {
         if(GC.isTraining)
         {
             TrainingScreenText.text = GC.http.config.TrainingScreenText;
-            Debug.Log("Setting GC.http.config.TrainingScreenText: \n" + GC.http.config.TrainingScreenText);
-            Debug.Log("Setting TrainingScreenText.text: \n" + TrainingScreenText.text);
+            //Debug.Log("Setting GC.http.config.TrainingScreenText: \n" + GC.http.config.TrainingScreenText);
+            //Debug.Log("Setting TrainingScreenText.text: \n" + TrainingScreenText.text);
         }
     }
 

@@ -51,7 +51,7 @@ public class HTTPController : MonoBehaviour
             config = tempconfig;
             configDownloaded = true;
 
-            Debug.Log("Config training screen text parsed: \n" + config.TrainingScreenText);
+            //Debug.Log("Config training screen text parsed: \n" + config.TrainingScreenText);
 
             foreach(Action a in onConfigDownloaded)
             {
@@ -96,7 +96,7 @@ public class HTTPController : MonoBehaviour
             node3 = pt.nodes.Count > 2 ? pt.nodes[2] : null,
             node4 = pt.nodes.Count > 3 ? pt.nodes[3] : null,
             node5 = pt.nodes.Count > 4 ? pt.nodes[4] : null,
-            accepted = pt.accepted,
+            accepted = pt.accepted ? 1 : 0,
 
             timer1 = pt.timers.Count > 0 ? pt.timers[0] : -1,
             timer2 = pt.timers.Count > 1 ? pt.timers[1] : -1,
@@ -108,8 +108,8 @@ public class HTTPController : MonoBehaviour
             timer8 = pt.timers.Count > 7 ? pt.timers[7] : -1,
             totalTime = totalTime,
 
-            hasTabbedOut = pt.totalTabbedOutTimer > 0,
-            totalTabbedOutTime = pt.totalTabbedOutTimer
+            hasTabbedOut = pt.tabbedOutAmount > 0 ? 1 : 0,
+            tabbedOutAmount = pt.tabbedOutAmount
         };
 
         var json = JsonUtility.ToJson(fullTry);

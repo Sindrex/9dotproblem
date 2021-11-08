@@ -25,8 +25,8 @@ public class TryRawAndConverted
     public float totalTime;
 
     //tabbed out
-    public bool hasTabbedOut;
-    public float totalTabbedOutTime;
+    public int hasTabbedOut;
+    public int tabbedOutAmount;
 
     //converted
     public string node1;
@@ -34,5 +34,5 @@ public class TryRawAndConverted
     public string node3;
     public string node4;
     public string node5;
-    public bool accepted;
+    public int accepted;
 }

@@ -16,7 +16,6 @@ var QueryHandler = {
     },
     CheckVisible: function(){
       if (document.visibilityState === 'visible') {
-        console.log('Plugin: Tab is visible');
         return true;
       } else {
         console.log('Plugin: Tab is NOT visible');
