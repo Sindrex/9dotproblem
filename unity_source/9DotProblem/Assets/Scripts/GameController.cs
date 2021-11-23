@@ -14,7 +14,10 @@ public class GameController : MonoBehaviour {
     public GameObject winText;
     public GameObject tryAgainText;
     public Text redirectText;
+    public Text redirectTextTimeUp;
     public InputField copyText;
+    public InputField copyTextTimeUp;
+    private string fullRedirectUrl;
     public bool accepted;
 
     public HTTPController http;
@@ -111,11 +114,12 @@ public class GameController : MonoBehaviour {
 
     public void redirect()
     {
+        print("redirecting: " + data.doRedirect);
         if (data.doRedirect)
         {
             if (!http.config.RedirectUrl.Trim().Equals(""))
             {
-                StartCoroutine(redirectWait(http.config.RedirectUrl, http.config.RedirectTime));
+                redirectWait(http.config.RedirectUrl, http.config.RedirectTime);
             }
             else
             {
@@ -134,19 +138,15 @@ public class GameController : MonoBehaviour {
         data.add(lineMaker.points, accepted, http, tabbedOutAmount);
     }
 
-    IEnumerator redirectWait(string url, int waitTime)
+    public void redirectWait(string url, int waitTime)
     {
         string fullURL = url + "/?id=" + data.playerID;
-        copyText.text = fullURL;
-        for (int i = 1; i <= waitTime; i++)
-        {
-            redirectText.text = "You will be redirected in " + (waitTime - i) + "...";
-            yield return new WaitForSeconds(1);
-        }
-
-        //Application.OpenURL(url);
+        print("Redirect URL: " + fullURL);
         OpenURL(fullURL);
+    }
 
-        redirectText.text = "If you are not redirected, please copy:";
+    public void CopyRedirectUrlToClipboard()
+    {
+        GUIUtility.systemCopyBuffer = fullRedirectUrl;
     }
 }

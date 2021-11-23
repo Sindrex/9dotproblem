@@ -12,7 +12,13 @@ var QueryHandler = {
     OpenURL: function(url){
       url = Pointer_stringify(url);
       console.log('Opening link: ' + url);
-      window.open(url,'_blank');
+      var button = document.createElement('button');
+      button.innerHTML = 'Click to redirect';
+      button.onclick = function(){
+        window.open(url,'_blank');
+      };
+      var body = document.getElementsByClassName("webgl-content")[0];
+      body.appendChild(button);
     },
     CheckVisible: function(){
       if (document.visibilityState === 'visible') {
