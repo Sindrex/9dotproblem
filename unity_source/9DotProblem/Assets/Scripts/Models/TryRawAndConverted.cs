@@ -27,6 +27,7 @@ public class TryRawAndConverted
     //tabbed out
     public int hasTabbedOut;
     public int tabbedOutAmount;
+    public double tabbedOutTime;
 
     //converted
     public string node1;

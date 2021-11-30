@@ -25,6 +25,7 @@ CREATE TABLE 9dotproblem.9dotproblemRaw (
 	totalTime FLOAT,
 	hasTabbedOut INT,
 	tabbedOutAmount INT,
+	tabbedOutTime FLOAT,
 	PRIMARY KEY (sequence_nr)
 );
 

@@ -108,8 +108,9 @@ public class HTTPController : MonoBehaviour
             timer8 = pt.timers.Count > 7 ? pt.timers[7] : -1,
             totalTime = totalTime,
 
-            hasTabbedOut = pt.tabbedOutAmount > 0 ? 1 : 0,
-            tabbedOutAmount = pt.tabbedOutAmount
+            hasTabbedOut = pt.tabbedOutTime > 0 ? 1 : 0,
+            tabbedOutAmount = pt.tabbedOutAmount,
+            tabbedOutTime = pt.tabbedOutTime
         };
 
         var json = JsonUtility.ToJson(fullTry);

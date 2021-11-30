@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -31,6 +32,8 @@ public class GameController : MonoBehaviour {
     private static extern bool CheckVisible();
     private int tabbedOutAmount;
     private bool hasTabbedOutLock = false;
+    private DateTime tabbedOutDateTime;
+    private double tabbedOutSeconds;
 
     //training
     public bool isTraining = false;
@@ -62,12 +65,17 @@ public class GameController : MonoBehaviour {
         {
             hasTabbedOutLock = true;
             tabbedOutAmount += 1;
+            tabbedOutDateTime = DateTime.Now;
             Debug.Log("Tabbed out! tabbedOutAmount=" + tabbedOutAmount);
         }
         else if(!isTraining && CheckVisible() && hasTabbedOutLock)
         {
+            var endTabbedOutDateTime = DateTime.Now;
+            var delta = endTabbedOutDateTime - tabbedOutDateTime;
+            tabbedOutSeconds += delta.TotalSeconds;
+
             hasTabbedOutLock = false;
-            Debug.Log("Tabbed in! Releasing lock");
+            Debug.Log("Tabbed in! Releasing lock. tabbedOutSeconds=" + tabbedOutSeconds);
         }
     }
 
@@ -135,7 +143,7 @@ public class GameController : MonoBehaviour {
 
     public void addPoints()
     {
-        data.add(lineMaker.points, accepted, http, tabbedOutAmount);
+        data.add(lineMaker.points, accepted, http, tabbedOutSeconds, tabbedOutAmount);
     }
 
     public void redirectWait(string url, int waitTime)

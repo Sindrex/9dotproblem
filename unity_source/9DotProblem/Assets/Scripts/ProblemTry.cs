@@ -18,5 +18,8 @@ public class ProblemTry {
     public bool accepted;
 
     [SerializeField]
+    public double tabbedOutTime;
+
+    [SerializeField]
     public int tabbedOutAmount;
 }
