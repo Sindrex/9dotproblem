@@ -3,7 +3,7 @@ By Sindre "Sindrex" Haugland Paulshus
 
 For BI
 
-Summer 2019
+Summer 2019 and Oct-Nov 2021
 
 ## About
 This project is a digitalization of the "9 Dot Problem", a puzzle used to analyze psychological phenomena. The user must think "outside the box" to be able to solve the puzzle.
@@ -27,19 +27,24 @@ Install the necessary dependencies using:
 
 ### Configuration
 There is a single JSON formatted file called "config.json". It has the following which need to be configured for the server to work:
- * **DATABASE_HOST:** The URL to the database host.
- * **DATABASE_USER:** The user for the database.
- * **DATABASE_PASS:** The password for the user.
- * **DATABASE_DB:** Which database to use within this user and host.
- * **URL:** The URL which the server is hosted on. Domain name or IP address. E.g. "https://ninedotproblem.herokuapp.com".
+ * **DatabaseHost:** The URL to the database host.
+ * **DatabaseUser:** The user for the database.
+ * **DatabasePass:** The password for the user.
+ * **DatabaseDB:** Which database to use within this user and host.
+ * **Url:** The URL which the server is hosted on. Domain name or IP address. E.g. "https://ninedotproblem.herokuapp.com".
    Note that you might need ":PORT" added to the end of the URL, where PORT is the port the server is listening on. This is not always the case, so you will have to test it out for yourself. For example "http://localhost:3000".
- * **MAX_SEC:** The number of *seconds* a user has to do the test. Must be an integer larger than 0.
- * **SHOW_TIMER:** Whether or not the timer should be shown. Set with either *"true"* or *"false"*.
- * **HELP_TEXT:** What text the help button should show. A text string of maximum 450 characters including spaces.
- * **REDIRECT_URL:** The URL to where the user will be redirected after the test is over. Set empty if you do not want the user to be directed. *Note: you also have to access the website with the parameter "redirect=true" for the user to be redirected.*
- * **REDIRECT_TIME:** The number of *seconds* from the test is finished till the user is redirected to the REDIRECT_URL.
+ * **TimeLimitSeconds:** The number of *seconds* a user has to do the test. Must be an integer larger than 0.
+ * **ShowTimer:** Whether or not the timer should be shown. Set with either *"true"* or *"false"*.
+ * **HelpText:** What text the help button should show. A text string of maximum 450 characters including spaces.
+ * **Title:** The title shown on the starting screen.
+ * **RedirectUrl:** The URL to where the user will be redirected after the test is over. Set empty if you do not want the user to be directed. *Note: you also have to access the website with the parameter "redirect=true" for the user to be redirected.*
+ * **RedirectTime:** The number of *seconds* from the test is finished till the user is redirected to the REDIRECT_URL. (DEPRECATED)
+  * **ShowLineAmount:** Whether or not to show the text with amount of lines remaining for a given try.
+  * **ShowTriesAmount:** Whether or not to show the text with amount of tries submitted.
+  * **ShowTrainingScreen:** Whether or not to show the training screen (the screeb after start and before the main part).
+  * **TrainingScreenText:** The text shown on the training screen. You can add "\n" for newline.
 
- *Note: the database needs to be an SQL database, preferrably using Mysql.*
+ *Note: the database needs to be an MySQL database.*
 
 ### Running server
 Run `npm start` from the top folder.
@@ -61,7 +66,7 @@ The has a simple structure, due to its low size.
 
 ## Understanding the database
 The database consists of 2 tables:
- * Raw data: Stored in the 9dotproblemRaw table. Coordinates (x,y) of the points in game space clicked by the user. The game space is a coordinate system where (0,0) is in the bottom-left corner and (17.9, 17.6) is the top-right corner. *Note that this is the full area the user can draw in, and not just what is seen from the camera during gameplay.* The dots have a radius of 0.4 and their coordinates are as follows (see data diagram for dots' identities):
+ * Raw data: Stored in the 9dotproblemRaw table. Coordinates (x,y) of the points in game space clicked by the user. The game space is a coordinate system where (1,3.9) is in the bottom-left corner and (16.8, 13.3) is the top-right corner. *Note that this is the full area the user can draw in, and what is seen from the camera during gameplay.* The dots have a radius of 0.4 and their coordinates are as follows (see data diagram for dots' identities):
    * 1: (6.9, 6.6)
    * 2: (8.9, 6.6)
    * 3: (10.9, 6.6)
@@ -121,4 +126,4 @@ Here's one way to integrate with Qualtrics so both of these options are possible
 ## Supported URL params
 * id: string. The participant's id.
 * redirect: bool ("true" or "false"). Whether or not to redirect after finishing the test.
-* showt: bool ("true" or "false"). Whether or not to show the countdown timer.
+* showt: bool ("true" or "false"). Whether or not to show the countdown timer. Note that if the server config "ShowTimer" is true, this param does nothing.
