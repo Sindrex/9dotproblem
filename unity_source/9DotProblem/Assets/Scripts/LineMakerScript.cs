@@ -5,6 +5,8 @@ using UnityEngine;
 public class LineMakerScript : MonoBehaviour {
 
     public GameController GC;
+    public Vector3 MinPos;
+    public Vector3 MaxPos;
 
     private LineRenderer lr; //current line
     public List<GameObject> myLines;
@@ -33,6 +35,14 @@ public class LineMakerScript : MonoBehaviour {
         if (!done)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if(mousePos.x < MinPos.x || mousePos.y < MinPos.y 
+                || mousePos.x > MaxPos.x || mousePos.y > MaxPos.y
+            )
+            {
+                //print(mousePos);
+                return;
+            }
 
             RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos, new Vector3(0, 0, -1), 100F);
             foreach(RaycastHit2D hit in hits)
