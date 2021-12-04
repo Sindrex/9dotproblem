@@ -13,7 +13,7 @@ var QueryHandler = {
       url = Pointer_stringify(url);
       console.log('Opening link: ' + url);
       var button = document.createElement('button');
-      button.innerHTML = 'Click to redirect';
+      button.innerHTML = 'Click to continue';
       button.onclick = function(){
         window.open(url,'_blank');
       };
