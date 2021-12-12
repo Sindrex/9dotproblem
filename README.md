@@ -3,7 +3,7 @@ By Sindre "Sindrex" Haugland Paulshus
 
 For BI
 
-Summer 2019 and Oct-Nov 2021
+Summer 2019 and Oct-Dec 2021
 
 ## About
 This project is a digitalization of the "9 Dot Problem", a puzzle used to analyze psychological phenomena. The user must think "outside the box" to be able to solve the puzzle.
@@ -14,8 +14,6 @@ The project consists of:
  * Source Code for the Unity game.
  * Initialization script for the database.
  * Diagram of the game space and data nodes.
-
-Trello board: https://trello.com/b/rl18dEEW/bi-9-dot-problem
 
 ## Installation and running
 ### Download and install
@@ -44,8 +42,6 @@ There is a single JSON formatted file called "config.json". It has the following
   * **ShowTrainingScreen:** Whether or not to show the training screen (the screeb after start and before the main part).
   * **TrainingScreenText:** The text shown on the training screen. You can add "\n" for newline.
 
- *Note: the database needs to be an MySQL database.*
-
 ### Running server
 Run `npm start` from the top folder.
 
@@ -57,6 +53,7 @@ Programs used to run:
  * Git bash or equivalent
  * NPM 6.4.1 or equivalent
  * NodeJS 8.12.0 or higher
+ * MySQL database.
 
 ## Folder hierarchy guide
 The has a simple structure, due to its low size.
@@ -66,7 +63,7 @@ The has a simple structure, due to its low size.
 
 ## Understanding the database
 The database consists of 2 tables:
- * Raw data: Stored in the 9dotproblemRaw table. Coordinates (x,y) of the points in game space clicked by the user. The game space is a coordinate system where (1,3.9) is in the bottom-left corner and (16.8, 13.3) is the top-right corner. *Note that this is the full area the user can draw in, and what is seen from the camera during gameplay.* The dots have a radius of 0.4 and their coordinates are as follows (see data diagram for dots' identities):
+ * Raw data: Stored in the 9dotproblemRaw table. Coordinates (x,y) of the points in game space clicked by the user. The game space is a coordinate system where (4.6, 4.2) is in the bottom-left corner and (13.2, 13) is the top-right corner. *Note that this is the area the user can draw in, boxed in by borders as seen during gameplay.* The dots have a radius of 0.5 and their coordinates are as follows (see data diagram for dots' identities):
    * 1: (6.9, 6.6)
    * 2: (8.9, 6.6)
    * 3: (10.9, 6.6)
@@ -77,7 +74,7 @@ The database consists of 2 tables:
    * 8: (8.9, 10.6)
    * 9: (10.9, 10.6)
  In addition 8 timers are stored. These are the time between different draw actions taken by the user.
-   * timer1: When the first point is created (and the user starts drawing first line).
+   * timer1: When the first point is created (and the user starts drawing first line. Time after start of the try.).
    * timer2: When the second point is created (and the user stops drawing first line).
    * timer3: When the user starts drawing second line.
    * timer4: When the third point is created (and the user stops drawing the second line).

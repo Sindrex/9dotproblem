@@ -33,4 +33,8 @@ public class TimerScript : MonoBehaviour {
             curTimer += Time.deltaTime;
         }
     }
+
+    public void Lap(){
+        curTimer = 0;
+    }
 }

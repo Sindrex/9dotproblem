@@ -39,6 +39,7 @@ public class UIController : MonoBehaviour {
     {
         if(!GC.isTraining)
         {
+            timeUpText.SetActive(false);
             quitText.SetActive(false);
             tryCount.text = "" + GC.data.tries.Count;
             timer = GC.timer;

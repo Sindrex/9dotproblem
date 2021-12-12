@@ -123,8 +123,8 @@ public class DataCollector : MonoBehaviour {
             timers.Add(point.timerAtCreation);
             if(index > 0)
             {
-                var previous = timers[index - 1];
-                timers.Add(point.timerAtNextDraw - previous);
+                //var previous = timers[index - 1];
+                timers.Add(point.timerAtNextDraw); //- previous);
             }
             index++;
         }

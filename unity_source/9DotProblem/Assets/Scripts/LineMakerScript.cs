@@ -22,12 +22,13 @@ public class LineMakerScript : MonoBehaviour {
     public GameObject pointPrefab;
     public List<LineDataPointController> points;
 
-    public float lastPointTime;
-
     // Use this for initialization
     void Start () {
         myLines = new List<GameObject>();
         points = new List<LineDataPointController>();
+
+        //new try, lap timer
+        GC.timer.Lap();
     }
 	
 	// Update is called once per frame
@@ -61,7 +62,8 @@ public class LineMakerScript : MonoBehaviour {
                 {
                     if(!GC.isTraining)
                     {
-                        points[points.Count - 1].timerAtNextDraw = GC.timer.fullTimer;
+                        points[points.Count - 1].timerAtNextDraw = GC.timer.curTimer;
+                        GC.timer.Lap(); //lap after each action
                     } 
                     print("timerAtNextDraw " + points[points.Count - 1].timerAtNextDraw);
                 }
@@ -90,14 +92,19 @@ public class LineMakerScript : MonoBehaviour {
                     GameObject prefab = Instantiate(pointPrefab, lineParent.transform);
                     prefab.transform.position = startPos;
                     var dataPoint = prefab.GetComponent<LineDataPointController>();
-                    if(!GC.isTraining) dataPoint.timerAtCreation = GC.timer.fullTimer;
+                    if(!GC.isTraining)
+                    {
+
+                        dataPoint.timerAtCreation = GC.timer.curTimer;
+                        GC.timer.Lap(); //lap after each action
+                    }
                     print("timerAtCreation " + dataPoint.timerAtCreation);
                     points.Add(dataPoint);
                 }
                 else if(myLines.Count < maxLines) //not first line
                 {
                     Vector3 prevEndPos = myLines[myLines.Count - 1].GetComponent<LineRenderer>().GetPosition(1);
-
+                                                                                       
                     myLine.transform.position = prevEndPos;
 
                     lr.SetPosition(0, prevEndPos);
@@ -126,7 +133,11 @@ public class LineMakerScript : MonoBehaviour {
                 prefab.transform.position = currentPos;
                 print(prefab.transform.position.ToString());
                 var dataPoint = prefab.GetComponent<LineDataPointController>();
-                if(!GC.isTraining) dataPoint.timerAtCreation = GC.timer.fullTimer;
+                if(!GC.isTraining)
+                {
+                    dataPoint.timerAtCreation = GC.timer.curTimer;
+                    GC.timer.Lap(); //lap after each action
+                }
                 print("timerAtCreation " + dataPoint.timerAtCreation);
                 points.Add(dataPoint);
 
@@ -135,8 +146,6 @@ public class LineMakerScript : MonoBehaviour {
                     done = true;
                     GC.checkDone();
                 }
-
-                if(!GC.isTraining) lastPointTime = GC.timer.fullTimer;
             }
         }
 	}
