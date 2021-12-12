@@ -33,7 +33,7 @@ public class LineMakerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!done)
+        if (!done && myLines.Count <= maxLines)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
