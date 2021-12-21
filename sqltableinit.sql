@@ -7,7 +7,7 @@ CREATE SCHEMA 9dotproblem;
 CREATE TABLE 9dotproblem.9dotproblemRaw (
 	sequence_nr INT NOT NULL AUTO_INCREMENT,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	player_id VARCHAR(32) NOT NULL,
+	player_id VARCHAR(50) NOT NULL,
 	try_nr INT NOT NULL,
 	point1 VARCHAR(32),
 	point2 VARCHAR(32),
@@ -32,7 +32,7 @@ CREATE TABLE 9dotproblem.9dotproblemRaw (
 CREATE TABLE 9dotproblem.9dotproblemConv (
 	sequence_nr INT NOT NULL AUTO_INCREMENT,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	player_id VARCHAR(32) NOT NULL,
+	player_id VARCHAR(50) NOT NULL,
 	try_nr INT NOT NULL,
 	node1 VARCHAR(32),
 	node2 VARCHAR(32),
