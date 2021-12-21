@@ -35,7 +35,7 @@ There is a single JSON formatted file called "config.json". It has the following
  * **ShowTimer:** Whether or not the timer should be shown. Set with either *"true"* or *"false"*.
  * **HelpText:** What text the help button should show. A text string of maximum 450 characters including spaces.
  * **Title:** The title shown on the starting screen.
- * **RedirectUrl:** The URL to where the user will be redirected after the test is over. Set empty if you do not want the user to be directed. *Note: you also have to access the website with the parameter "redirect=true" for the user to be redirected.*
+ * **RedirectUrl:** The URL to where the user will be redirected after the test is over. Set empty if you do not want the user to be directed. This url must include an additional "?" at the end. Example: "https://bino.qualtrics.com/jfe/form/SV_5nkEuIvT2Cn3rIF?". *Note: The user must access the website with the parameter "redirect=true" to be redirected. Example: "http://localhost:3000?id=abc&redirect=true", note the "&" used to add multiple parameters to the url.*
  * **RedirectTime:** The number of *seconds* from the test is finished till the user is redirected to the REDIRECT_URL. (DEPRECATED)
   * **ShowLineAmount:** Whether or not to show the text with amount of lines remaining for a given try.
   * **ShowTriesAmount:** Whether or not to show the text with amount of tries submitted.
@@ -63,7 +63,7 @@ The has a simple structure, due to its low size.
 
 ## Understanding the database
 The database consists of 2 tables:
- * Raw data: Stored in the 9dotproblemRaw table. Coordinates (x,y) of the points in game space clicked by the user. The game space is a coordinate system where (4.6, 4.2) is in the bottom-left corner and (13.2, 13) is the top-right corner. *Note that this is the area the user can draw in, boxed in by borders as seen during gameplay.* The dots have a radius of 0.5 and their coordinates are as follows (see data diagram for dots' identities):
+ * Raw data: Stored in the 9dotproblemRaw table. Coordinates (x,y) of the points in game space clicked by the user. The game space is a coordinate system where (4.6, 4.2) is in the bottom-left corner and (13.2, 13) is the top-right corner. *Note that this is the area the user can draw in, boxed in by borders as seen during gameplay.* The dots have a radius of 0.45 and their coordinates are as follows (see data diagram for dots' identities):
    * 1: (6.9, 6.6)
    * 2: (8.9, 6.6)
    * 3: (10.9, 6.6)

@@ -12,7 +12,7 @@ public class LineMakerScript : MonoBehaviour {
     public List<GameObject> myLines;
 
     public int maxLines = 4;
-    public float lineWidth = 0.1f;
+    public float lineWidth = 0.05f;
 
     public bool done = false;
 

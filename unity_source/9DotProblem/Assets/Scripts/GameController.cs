@@ -148,7 +148,7 @@ public class GameController : MonoBehaviour {
 
     public void redirectWait(string url, int waitTime)
     {
-        string fullURL = url + "/?id=" + data.playerID;
+        string fullURL = url + "id=" + data.playerID;
         print("Redirect URL: " + fullURL);
         OpenURL(fullURL);
     }
